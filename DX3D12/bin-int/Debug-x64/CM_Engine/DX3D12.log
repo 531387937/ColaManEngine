@@ -1,0 +1,4 @@
+﻿  ShapesApp.cpp
+G:\ColaManEngine\DX3D12\DX3D12\Chapter7\ShapesApp.cpp(268,40): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+    正在创建库 G:\ColaManEngine\DX3D12\bin\Debug-x64\CM_Engine\CM_Engine.lib 和对象 G:\ColaManEngine\DX3D12\bin\Debug-x64\CM_Engine\CM_Engine.exp
+  DX3D12.vcxproj -> G:\ColaManEngine\DX3D12\bin\Debug-x64\CM_Engine\CM_Engine.dll
