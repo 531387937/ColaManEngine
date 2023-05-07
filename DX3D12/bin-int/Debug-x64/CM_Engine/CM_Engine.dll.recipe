@@ -2,12 +2,12 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>G:\ColaManEngine\DX3D12\bin\Debug-x64\CM_Engine\CM_Engine.dll</FullPath>
+      <FullPath>G:\ColaManEngine\DX3D12\bin\Debug-x64\Sandbox\CM_Engine.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>G:\ColaManEngine\DX3D12\bin\Debug-x64\CM_Engine\Color.cso</FullPath>
+      <FullPath>G:\ColaManEngine\DX3D12\bin\Debug-x64\Sandbox\Color.cso</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

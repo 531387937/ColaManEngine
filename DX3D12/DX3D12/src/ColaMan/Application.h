@@ -1,14 +1,15 @@
 #pragma once
 
 #include <wtypes.h>
+#include "Core.h"
 
 namespace ColaMan {
 
-	class __declspec(dllexport) Application 
+	class CM_API Application
 	{
 	public:
 		Application();
-		~Application();
+		virtual ~Application();
 
 		int Run(HINSTANCE hInstance);
 	};

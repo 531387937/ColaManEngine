@@ -51,7 +51,7 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Application.cpp">
+    <ClCompile Include="src\ColaMan\Application.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,7 +86,10 @@
     <ClInclude Include="src\ColaMan\Core.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Application.h">
+    <ClInclude Include="src\ColaMan\Application.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColaMan.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

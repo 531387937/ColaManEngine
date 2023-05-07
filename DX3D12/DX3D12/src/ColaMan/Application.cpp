@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "Chapter7/ShapesApp.h"
+#include "..\..\Chapter7\ShapesApp.h"
 
 namespace ColaMan {
 
