@@ -54,6 +54,9 @@
     <ClCompile Include="src\ColaMan\Application.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\ColaMan\Log.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\d3d12book-master\Common\d3dApp.h">
@@ -90,6 +93,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\ColaMan.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColaMan\Log.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

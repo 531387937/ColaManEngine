@@ -1,2 +1,6 @@
 ﻿  SandboxApp.cpp
+G:\ColaManEngine\DX3D12\DX3D12\src\ColaMan\Log.h(17,42): warning C4251: “ColaMan::Log::s_CoreLogger”: class“std::shared_ptr<spdlog::logger>”需要有 dll 接口由 class“ColaMan::Log”的客户端使用
+G:\ColaManEngine\DX3D12\vendor\spdlog\include\spdlog\details\registry.h(34): message : 参见“std::shared_ptr<spdlog::logger>”的声明
+G:\ColaManEngine\DX3D12\DX3D12\src\ColaMan\Log.h(18,42): warning C4251: “ColaMan::Log::s_ClientLogger”: class“std::shared_ptr<spdlog::logger>”需要有 dll 接口由 class“ColaMan::Log”的客户端使用
+G:\ColaManEngine\DX3D12\vendor\spdlog\include\spdlog\details\registry.h(34): message : 参见“std::shared_ptr<spdlog::logger>”的声明
   Sandbox.vcxproj -> G:\ColaManEngine\DX3D12\bin\Debug-x64\Sandbox\Sandbox.exe

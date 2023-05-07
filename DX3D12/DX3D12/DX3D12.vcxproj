@@ -127,6 +127,7 @@
       <PrecompiledHeader />
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -143,6 +144,7 @@
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(SolutionDir)\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -157,6 +159,7 @@
     <ClCompile Include="..\..\d3d12book-master\Common\GameTimer.cpp" />
     <ClCompile Include="..\..\d3d12book-master\Common\GeometryGenerator.cpp" />
     <ClCompile Include="..\..\d3d12book-master\Common\MathHelper.cpp" />
+    <ClCompile Include="src\ColaMan\Log.cpp" />
     <ClCompile Include="src\ColaMan\Application.cpp" />
     <ClCompile Include="Chapter4\InitDirect3DApp.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -241,6 +244,7 @@
     <ClInclude Include="..\..\d3d12book-master\Common\GeometryGenerator.h" />
     <ClInclude Include="..\..\d3d12book-master\Common\MathHelper.h" />
     <ClInclude Include="..\..\d3d12book-master\Common\UploadBuffer.h" />
+    <ClInclude Include="src\ColaMan\Log.h" />
     <ClInclude Include="src\ColaMan.h" />
     <ClInclude Include="src\ColaMan\Application.h" />
     <ClInclude Include="Chapter4\InitDirect3DApp.h" />

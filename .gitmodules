@@ -1,0 +1,3 @@
+[submodule "DX3D12/vendor/spdlog"]
+	path = DX3D12/vendor/spdlog
+	url = https://github.com/gabime/spdlog
