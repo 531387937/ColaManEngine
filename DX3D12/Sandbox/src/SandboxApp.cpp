@@ -24,5 +24,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE preInstance, PSTR cmdLine, int
 	CM_CORE_WARN("Initialized log!");
 	CM_TRACE("Hello!");
 	Sandbox *app = new Sandbox();
+	ColaMan::WindowResizeEvent e(1280, 720);
+	CM_TRACE(e);
 	return app->Run(hInstance);
 }

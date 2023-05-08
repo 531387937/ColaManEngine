@@ -1,0 +1,20 @@
+﻿  Camera.cpp
+  d3dApp.cpp
+  d3dUtil.cpp
+  DDSTextureLoader.cpp
+  GameTimer.cpp
+  GeometryGenerator.cpp
+  MathHelper.cpp
+  Application.cpp
+  Log.cpp
+G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Log.h(18,42): warning C4251: “ColaMan::Log::s_CoreLogger”: class“std::shared_ptr<spdlog::logger>”需要有 dll 接口由 class“ColaMan::Log”的客户端使用
+G:\ColaManEngine\DX3D12\CM_Engine\vendor\spdlog\include\spdlog\details\registry.h(34): message : 参见“std::shared_ptr<spdlog::logger>”的声明
+G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Log.h(19,42): warning C4251: “ColaMan::Log::s_ClientLogger”: class“std::shared_ptr<spdlog::logger>”需要有 dll 接口由 class“ColaMan::Log”的客户端使用
+G:\ColaManEngine\DX3D12\CM_Engine\vendor\spdlog\include\spdlog\details\registry.h(34): message : 参见“std::shared_ptr<spdlog::logger>”的声明
+  hzpch.cpp
+  正在生成代码...
+    正在创建库 ..\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.lib 和对象 ..\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.exp
+Application.obj : error LNK2019: 无法解析的外部符号 "public: __cdecl ShapesApp::ShapesApp(struct HINSTANCE__ *)" (??0ShapesApp@@QEAA@PEAUHINSTANCE__@@@Z)，函数 "public: int __cdecl ColaMan::Application::Run(struct HINSTANCE__ *)" (?Run@Application@ColaMan@@QEAAHPEAUHINSTANCE__@@@Z) 中引用了该符号
+Application.obj : error LNK2019: 无法解析的外部符号 "public: virtual __cdecl ShapesApp::~ShapesApp(void)" (??1ShapesApp@@UEAA@XZ)，函数 "public: int __cdecl ColaMan::Application::Run(struct HINSTANCE__ *)" (?Run@Application@ColaMan@@QEAAHPEAUHINSTANCE__@@@Z) 中引用了该符号
+Application.obj : error LNK2019: 无法解析的外部符号 "public: virtual bool __cdecl ShapesApp::Initialize(void)" (?Initialize@ShapesApp@@UEAA_NXZ)，函数 "public: int __cdecl ColaMan::Application::Run(struct HINSTANCE__ *)" (?Run@Application@ColaMan@@QEAAHPEAUHINSTANCE__@@@Z) 中引用了该符号
+..\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.dll : fatal error LNK1120: 3 个无法解析的外部命令

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ColaMan">
+      <UniqueIdentifier>{60FD0234-CCDC-81CF-D5F4-0CA64153E830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ColaMan\Core">
+      <UniqueIdentifier>{B87DD111-A4E0-60B6-4D66-996C39A82C39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ColaMan\Event">
+      <UniqueIdentifier>{B106294C-1DC7-A482-E601-EEFF5281E95E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ColaMan.h" />
+    <ClInclude Include="src\ColaMan\Application.h">
+      <Filter>ColaMan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColaMan\Core.h">
+      <Filter>ColaMan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColaMan\Core\KeyCodes.h">
+      <Filter>ColaMan\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColaMan\Core\MouseCodes.h">
+      <Filter>ColaMan\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColaMan\Event\ApplicationEvent.h">
+      <Filter>ColaMan\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColaMan\Event\Event.h">
+      <Filter>ColaMan\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColaMan\Event\KeyEvent.h">
+      <Filter>ColaMan\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColaMan\Event\MouseEvent.h">
+      <Filter>ColaMan\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColaMan\Log.h">
+      <Filter>ColaMan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hzpch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ColaMan\Application.cpp">
+      <Filter>ColaMan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ColaMan\Log.cpp">
+      <Filter>ColaMan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hzpch.cpp" />
+  </ItemGroup>
+</Project>
