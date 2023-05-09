@@ -1,1 +1,12 @@
-﻿  CM_Engine.vcxproj -> G:\ColaManEngine\DX3D12\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.dll
+﻿  Application.cpp
+  Camera.cpp
+  DDSTextureLoader.cpp
+  GameTimer.cpp
+  GeometryGenerator.cpp
+  MathHelper.cpp
+  ShapesApp.cpp
+G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Render\ShapesApp.cpp(268,40): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  d3dApp.cpp
+  d3dUtil.cpp
+  正在生成代码...
+  CM_Engine.vcxproj -> G:\ColaManEngine\DX3D12\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.dll
