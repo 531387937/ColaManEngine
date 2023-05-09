@@ -19,6 +19,9 @@ project "CM_Engine"
 	targetdir ("bin/"..outputdir.."/%{prj.name}")
 	objdir ("bin-int/"..outputdir.."/%{prj.name}")
 
+	pchheader "hzpch.h"
+	pchsource "CM_Engine/src/hzpch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",
@@ -28,6 +31,7 @@ project "CM_Engine"
 	includedirs
 	{
 		"%{prj.name}/vendor/spdlog/include;",
+		"%{prj.name}/src;"
 	}
 
 	filter "system:windows"

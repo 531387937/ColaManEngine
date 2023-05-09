@@ -43,37 +43,39 @@
     <ClInclude Include="src\ColaMan\Log.h">
       <Filter>ColaMan</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Render\Camera.h">
+    <ClInclude Include="src\ColaMan\DirectX12\Camera.h">
       <Filter>ColaMan\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Render\DDSTextureLoader.h">
+    <ClInclude Include="src\ColaMan\DirectX12\DDSTextureLoader.h">
       <Filter>ColaMan\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Render\GameTimer.h">
+    <ClInclude Include="src\ColaMan\DirectX12\GameTimer.h">
       <Filter>ColaMan\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Render\GeometryGenerator.h">
+    <ClInclude Include="src\ColaMan\DirectX12\GeometryGenerator.h">
       <Filter>ColaMan\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Render\MathHelper.h">
+    <ClInclude Include="src\ColaMan\DirectX12\MathHelper.h">
       <Filter>ColaMan\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Render\ShapesApp.h">
+    <ClInclude Include="src\ColaMan\DirectX12\ShapesApp.h">
       <Filter>ColaMan\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Render\UploadBuffer.h">
+    <ClInclude Include="src\ColaMan\DirectX12\UploadBuffer.h">
       <Filter>ColaMan\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Render\d3dApp.h">
+    <ClInclude Include="src\ColaMan\DirectX12\d3dApp.h">
       <Filter>ColaMan\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Render\d3dUtil.h">
+    <ClInclude Include="src\ColaMan\DirectX12\d3dUtil.h">
       <Filter>ColaMan\Render</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Render\d3dx12.h">
+    <ClInclude Include="src\ColaMan\DirectX12\d3dx12.h">
       <Filter>ColaMan\Render</Filter>
     </ClInclude>
     <ClInclude Include="src\hzpch.h" />
+    <ClInclude Include="src\ColaMan\Window.h" />
+    <ClInclude Include="src\ColaMan\Platform\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ColaMan\Application.cpp">
@@ -82,30 +84,31 @@
     <ClCompile Include="src\ColaMan\Log.cpp">
       <Filter>ColaMan</Filter>
     </ClCompile>
-    <ClCompile Include="src\ColaMan\Render\Camera.cpp">
+    <ClCompile Include="src\ColaMan\DirectX12\Camera.cpp">
       <Filter>ColaMan\Render</Filter>
     </ClCompile>
-    <ClCompile Include="src\ColaMan\Render\DDSTextureLoader.cpp">
+    <ClCompile Include="src\ColaMan\DirectX12\DDSTextureLoader.cpp">
       <Filter>ColaMan\Render</Filter>
     </ClCompile>
-    <ClCompile Include="src\ColaMan\Render\GameTimer.cpp">
+    <ClCompile Include="src\ColaMan\DirectX12\GameTimer.cpp">
       <Filter>ColaMan\Render</Filter>
     </ClCompile>
-    <ClCompile Include="src\ColaMan\Render\GeometryGenerator.cpp">
+    <ClCompile Include="src\ColaMan\DirectX12\GeometryGenerator.cpp">
       <Filter>ColaMan\Render</Filter>
     </ClCompile>
-    <ClCompile Include="src\ColaMan\Render\MathHelper.cpp">
+    <ClCompile Include="src\ColaMan\DirectX12\MathHelper.cpp">
       <Filter>ColaMan\Render</Filter>
     </ClCompile>
-    <ClCompile Include="src\ColaMan\Render\ShapesApp.cpp">
+    <ClCompile Include="src\ColaMan\DirectX12\ShapesApp.cpp">
       <Filter>ColaMan\Render</Filter>
     </ClCompile>
-    <ClCompile Include="src\ColaMan\Render\d3dApp.cpp">
+    <ClCompile Include="src\ColaMan\DirectX12\d3dApp.cpp">
       <Filter>ColaMan\Render</Filter>
     </ClCompile>
-    <ClCompile Include="src\ColaMan\Render\d3dUtil.cpp">
+    <ClCompile Include="src\ColaMan\DirectX12\d3dUtil.cpp">
       <Filter>ColaMan\Render</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\ColaMan\Platform\WindowsWindow.cpp" />
   </ItemGroup>
 </Project>

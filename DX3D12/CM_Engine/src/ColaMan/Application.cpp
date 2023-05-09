@@ -1,5 +1,6 @@
+#include "hzpch.h"
 #include "Application.h"
-#include "Render/ShapesApp.h"
+#include "DirectX12/ShapesApp.h"
 
 namespace ColaMan {
 

@@ -2,7 +2,7 @@
 
 #include "Event.h"
 #include "../Core/MouseCodes.h"
-#include <sstream>
+
 namespace ColaMan {
 
 	class MouseMovedEvent : public Event
