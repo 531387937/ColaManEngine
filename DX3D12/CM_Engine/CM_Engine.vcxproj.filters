@@ -41,6 +41,16 @@
       <Filter>ColaMan</Filter>
     </ClInclude>
     <ClInclude Include="src\hzpch.h" />
+    <ClInclude Include="Chapter7\Camera.h" />
+    <ClInclude Include="Chapter7\d3dApp.h" />
+    <ClInclude Include="Chapter7\d3dUtil.h" />
+    <ClInclude Include="Chapter7\d3dx12.h" />
+    <ClInclude Include="Chapter7\DDSTextureLoader.h" />
+    <ClInclude Include="Chapter7\GameTimer.h" />
+    <ClInclude Include="Chapter7\GeometryGenerator.h" />
+    <ClInclude Include="Chapter7\MathHelper.h" />
+    <ClInclude Include="Chapter7\ShapesApp.h" />
+    <ClInclude Include="Chapter7\UploadBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ColaMan\Application.cpp">
@@ -50,5 +60,13 @@
       <Filter>ColaMan</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="Chapter7\Camera.cpp" />
+    <ClCompile Include="Chapter7\d3dApp.cpp" />
+    <ClCompile Include="Chapter7\d3dUtil.cpp" />
+    <ClCompile Include="Chapter7\DDSTextureLoader.cpp" />
+    <ClCompile Include="Chapter7\GameTimer.cpp" />
+    <ClCompile Include="Chapter7\GeometryGenerator.cpp" />
+    <ClCompile Include="Chapter7\MathHelper.cpp" />
+    <ClCompile Include="Chapter7\ShapesApp.cpp" />
   </ItemGroup>
 </Project>
