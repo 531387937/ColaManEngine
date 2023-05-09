@@ -26,7 +26,7 @@ namespace ColaMan {
 
 		struct WindowData
 		{
-			wchar_t* Title;
+			wchar_t* Title = nullptr;
 			unsigned int Width, Height;
 			bool VSync;
 

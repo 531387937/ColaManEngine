@@ -3,7 +3,13 @@
 #include "WindowsWindow.h"
 #include <stdlib.h>
 namespace ColaMan {
-
+	LRESULT CALLBACK
+		MainWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+	{
+		// Forward hwnd on because we can get messages (e.g., WM_CREATE)
+		// before CreateWindow returns, and thus before mhMainWnd is valid.
+		return DefWindowProc(hwnd, msg, wParam, lParam);
+	}
 	static bool s_WindowInitialized = false;
 
 	Window* Window::Create(HINSTANCE hInstance, const WindowProps& props)
@@ -29,14 +35,10 @@ namespace ColaMan {
 		
 		CM_CORE_INFO("Creating window {0} ({1},{2})", props.Title, props.Width, props.Height);
 
-		if (!s_WindowInitialized)
-		{
-
-		}
 
 		WNDCLASS wc;
 		wc.style = CS_HREDRAW | CS_VREDRAW;
-		//wc.lpfnWndProc
+		wc.lpfnWndProc = MainWndProc;
 		wc.cbClsExtra = 0;
 		wc.cbWndExtra = 0;
 		wc.hInstance = mhAppInst;

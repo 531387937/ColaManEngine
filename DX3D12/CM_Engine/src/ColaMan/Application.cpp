@@ -16,11 +16,13 @@ namespace ColaMan {
 	{
 		try
 		{
-			ShapesApp theApp(hInstance);
+			m_Window = std::unique_ptr<Window>(Window::Create(hInstance));
+			/*ShapesApp theApp(hInstance);
 			if (!theApp.Initialize())
 				return 0;
 
-			return theApp.Run();
+			return theApp.Run();*/
+			while (true);
 		}
 		catch (DxException& e)
 		{
