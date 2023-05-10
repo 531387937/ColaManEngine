@@ -143,8 +143,8 @@
     <ClInclude Include="src\ColaMan\Core.h" />
     <ClInclude Include="src\ColaMan\Core\KeyCodes.h" />
     <ClInclude Include="src\ColaMan\Core\MouseCodes.h" />
-    <ClInclude Include="src\ColaMan\DirectX12\Camera.h" />
     <ClInclude Include="src\ColaMan\DirectX12\CMd3dApp.h" />
+    <ClInclude Include="src\ColaMan\DirectX12\Camera.h" />
     <ClInclude Include="src\ColaMan\DirectX12\DDSTextureLoader.h" />
     <ClInclude Include="src\ColaMan\DirectX12\GameTimer.h" />
     <ClInclude Include="src\ColaMan\DirectX12\GeometryGenerator.h" />
@@ -165,8 +165,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ColaMan\Application.cpp" />
-    <ClCompile Include="src\ColaMan\DirectX12\Camera.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\CMd3dApp.cpp" />
+    <ClCompile Include="src\ColaMan\DirectX12\Camera.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\DDSTextureLoader.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\GameTimer.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\GeometryGenerator.cpp" />

@@ -3,7 +3,7 @@
 #include "DirectX12/ShapesApp.h"
 
 namespace ColaMan {
-
+#define BIND_EVENT_FN(x) std::bind(&Application::x,this,std::placeholders::_1)
 	Application::Application()
 	{
 	}
@@ -14,7 +14,16 @@ namespace ColaMan {
 	Application::Application(HINSTANCE hInstance)
 	{
 		m_Window = std::unique_ptr<Window>(Window::Create(hInstance));
+		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 	}
+
+	void Application::OnEvent(Event& e)
+	{
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+		CM_CORE_INFO("{0}",e);
+	}
+	
 	int Application::Run(HINSTANCE hInstance)
 	{
 		try
@@ -22,19 +31,14 @@ namespace ColaMan {
 			ShapesApp theApp(m_Window->GetWindow());
 			if (!theApp.Initialize())
 				return 0;
-			MSG msg = { 0 };
 
-
-			while (msg.message != WM_QUIT)
+			while (m_Running)
 			{
-				if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
-				{
-					TranslateMessage(&msg);
-					DispatchMessage(&msg);
-				}
+				
 				theApp.Run();
+				m_Window->OnUpdate();
 			}
-			return (int)msg.wParam;
+			return 0;
 			
 		}
 		catch (DxException& e)
@@ -42,6 +46,12 @@ namespace ColaMan {
 			MessageBox(nullptr, e.ToString().c_str(), L"HR Failed", MB_OK);
 			return 0;
 		}
+	}
+
+	bool Application::OnWindowClose(WindowCloseEvent& e)
+	{
+		m_Running = false;
+		return true;
 	}
 }
 

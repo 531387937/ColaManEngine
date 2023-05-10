@@ -31,6 +31,9 @@
     <ClInclude Include="src\ColaMan\Core\MouseCodes.h">
       <Filter>ColaMan\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\ColaMan\DirectX12\CMd3dApp.h">
+      <Filter>ColaMan\DirectX12</Filter>
+    </ClInclude>
     <ClInclude Include="src\ColaMan\DirectX12\Camera.h">
       <Filter>ColaMan\DirectX12</Filter>
     </ClInclude>
@@ -83,11 +86,13 @@
       <Filter>ColaMan</Filter>
     </ClInclude>
     <ClInclude Include="src\hzpch.h" />
-    <ClInclude Include="src\ColaMan\DirectX12\CMd3dApp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ColaMan\Application.cpp">
       <Filter>ColaMan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ColaMan\DirectX12\CMd3dApp.cpp">
+      <Filter>ColaMan\DirectX12</Filter>
     </ClCompile>
     <ClCompile Include="src\ColaMan\DirectX12\Camera.cpp">
       <Filter>ColaMan\DirectX12</Filter>
@@ -120,6 +125,5 @@
       <Filter>ColaMan\Platform</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
-    <ClCompile Include="src\ColaMan\DirectX12\CMd3dApp.cpp" />
   </ItemGroup>
 </Project>

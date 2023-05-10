@@ -1,6 +1,17 @@
 #pragma once
 #include "ColaMan/Window.h"
 namespace ColaMan {
+
+	static struct WindowData
+	{
+		using EventCallbackFn = std::function<void(Event&)>;
+		wchar_t* Title = L" \0";
+		unsigned int Width, Height;
+		bool VSync;
+
+		EventCallbackFn EventCallback;
+	};
+
 	class WindowsWindow :public Window
 	{
 	public:
@@ -9,7 +20,16 @@ namespace ColaMan {
 
 		void OnUpdate() override
 		{
+			static MSG msg = { 0 };
+			if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+			if (msg.message == WM_QUIT)
+			{
 
+			}
 		}
 
 		inline unsigned int GetWidth() const override { return m_Data.Width; }
@@ -19,20 +39,12 @@ namespace ColaMan {
 		void SetVSync(bool enabled) override;
 		bool IsVSync()const override;
 		HWND GetWindow() const override;
+
 	private:
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
 	private:
 		HWND m_Window;
-
-		struct WindowData
-		{
-			wchar_t* Title = nullptr;
-			unsigned int Width, Height;
-			bool VSync;
-
-			EventCallbackFn EventCallback;
-		};
 
 		HINSTANCE mhAppInst = nullptr;
 		WindowData m_Data;

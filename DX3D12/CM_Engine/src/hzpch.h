@@ -14,6 +14,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "ColaMan/Log.h"
+
 #ifdef CM_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif
