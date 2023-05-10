@@ -1,9 +1,6 @@
-﻿  WindowsWindow.cpp
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Log.h(18,42): warning C4251: “ColaMan::Log::s_CoreLogger”: class“std::shared_ptr<spdlog::logger>”需要有 dll 接口由 class“ColaMan::Log”的客户端使用
-G:\ColaManEngine\DX3D12\CM_Engine\vendor\spdlog\include\spdlog\details\registry.h(34): message : 参见“std::shared_ptr<spdlog::logger>”的声明
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Log.h(19,42): warning C4251: “ColaMan::Log::s_ClientLogger”: class“std::shared_ptr<spdlog::logger>”需要有 dll 接口由 class“ColaMan::Log”的客户端使用
-G:\ColaManEngine\DX3D12\CM_Engine\vendor\spdlog\include\spdlog\details\registry.h(34): message : 参见“std::shared_ptr<spdlog::logger>”的声明
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Platform\WindowsWindow.cpp(57,21): warning C4838: 从“unsigned int”转换到“LONG”需要收缩转换
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Platform\WindowsWindow.cpp(57,34): warning C4838: 从“unsigned int”转换到“LONG”需要收缩转换
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Platform\WindowsWindow.cpp(34,8): warning C4996: 'mbstowcs': This function or variable may be unsafe. Consider using mbstowcs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+﻿  Application.cpp
+G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Application.h(19,27): warning C4251: “ColaMan::Application::m_Window”: class“std::unique_ptr<ColaMan::Window,std::default_delete<ColaMan::Window>>”需要有 dll 接口由 class“ColaMan::Application”的客户端使用
+G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Application.h(19): message : 参见“std::unique_ptr<ColaMan::Window,std::default_delete<ColaMan::Window>>”的声明
+  CMd3dApp.cpp
+  正在生成代码...
   CM_Engine.vcxproj -> G:\ColaManEngine\DX3D12\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.dll

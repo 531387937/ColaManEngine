@@ -84,4 +84,8 @@ namespace ColaMan {
 	{
 		return m_Data.VSync;
 	}
+	HWND WindowsWindow::GetWindow() const
+	{
+		return m_Window;
+	}
 }

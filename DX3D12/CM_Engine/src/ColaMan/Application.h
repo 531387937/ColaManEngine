@@ -10,6 +10,7 @@ namespace ColaMan {
 	{
 	public:
 		Application();
+		Application(HINSTANCE hInstance);
 		virtual ~Application();
 
 		int Run(HINSTANCE hInstance);

@@ -143,12 +143,8 @@
     <ClInclude Include="src\ColaMan\Core.h" />
     <ClInclude Include="src\ColaMan\Core\KeyCodes.h" />
     <ClInclude Include="src\ColaMan\Core\MouseCodes.h" />
-    <ClInclude Include="src\ColaMan\Event\ApplicationEvent.h" />
-    <ClInclude Include="src\ColaMan\Event\Event.h" />
-    <ClInclude Include="src\ColaMan\Event\KeyEvent.h" />
-    <ClInclude Include="src\ColaMan\Event\MouseEvent.h" />
-    <ClInclude Include="src\ColaMan\Log.h" />
     <ClInclude Include="src\ColaMan\DirectX12\Camera.h" />
+    <ClInclude Include="src\ColaMan\DirectX12\CMd3dApp.h" />
     <ClInclude Include="src\ColaMan\DirectX12\DDSTextureLoader.h" />
     <ClInclude Include="src\ColaMan\DirectX12\GameTimer.h" />
     <ClInclude Include="src\ColaMan\DirectX12\GeometryGenerator.h" />
@@ -158,14 +154,19 @@
     <ClInclude Include="src\ColaMan\DirectX12\d3dApp.h" />
     <ClInclude Include="src\ColaMan\DirectX12\d3dUtil.h" />
     <ClInclude Include="src\ColaMan\DirectX12\d3dx12.h" />
+    <ClInclude Include="src\ColaMan\Event\ApplicationEvent.h" />
+    <ClInclude Include="src\ColaMan\Event\Event.h" />
+    <ClInclude Include="src\ColaMan\Event\KeyEvent.h" />
+    <ClInclude Include="src\ColaMan\Event\MouseEvent.h" />
+    <ClInclude Include="src\ColaMan\Log.h" />
     <ClInclude Include="src\ColaMan\Platform\WindowsWindow.h" />
     <ClInclude Include="src\ColaMan\Window.h" />
     <ClInclude Include="src\hzpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ColaMan\Application.cpp" />
-    <ClCompile Include="src\ColaMan\Log.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\Camera.cpp" />
+    <ClCompile Include="src\ColaMan\DirectX12\CMd3dApp.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\DDSTextureLoader.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\GameTimer.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\GeometryGenerator.cpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="src\ColaMan\DirectX12\ShapesApp.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\d3dApp.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\d3dUtil.cpp" />
+    <ClCompile Include="src\ColaMan\Log.cpp" />
     <ClCompile Include="src\ColaMan\Platform\WindowsWindow.cpp" />
     <ClCompile Include="src\hzpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

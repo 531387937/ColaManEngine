@@ -5,7 +5,7 @@
 
 const int gNumFrameResources = 3;
 
-ShapesApp::ShapesApp(HINSTANCE hInstance) : D3DApp(hInstance)
+ShapesApp::ShapesApp(HWND window) : CMD3DApp(window)
 {
 }
 
@@ -17,7 +17,7 @@ ShapesApp::~ShapesApp()
 
 bool ShapesApp::Initialize()
 {
-	if (!D3DApp::Initialize())
+	if (!CMD3DApp::Initialize())
 	{
 		return false;
 	}
@@ -43,7 +43,7 @@ bool ShapesApp::Initialize()
 
 void ShapesApp::OnResize()
 {
-	D3DApp::OnResize();
+	CMD3DApp::OnResize();
 
 	XMMATRIX p = XMMatrixPerspectiveFovLH(0.25f * MathHelper::Pi, AspectRatio(), 1.0f, 1000.0f);
 	XMStoreFloat4x4(&mProj, p);

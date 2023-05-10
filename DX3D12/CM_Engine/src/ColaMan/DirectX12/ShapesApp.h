@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "d3dApp.h"
+#include "CMd3dApp.h"
 #include "d3dUtil.h"
 #include "UploadBuffer.h"
 using namespace DirectX;
@@ -77,10 +77,10 @@ inline FrameResource::~FrameResource()
 {
 }
 
-class ShapesApp:public D3DApp
+class ShapesApp:public CMD3DApp
 {
 public:
-    ShapesApp(HINSTANCE hInstance);
+    ShapesApp(HWND window);
     ShapesApp(const ShapesApp& rhs) = delete;
     ShapesApp& operator=(const ShapesApp& rhs) = delete;
     ~ShapesApp();

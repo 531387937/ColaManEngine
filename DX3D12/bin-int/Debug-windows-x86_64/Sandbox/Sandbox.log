@@ -1,6 +1,6 @@
 ﻿  SandboxApp.cpp
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Application.h(18,27): warning C4251: “ColaMan::Application::m_Window”: class“std::unique_ptr<ColaMan::Window,std::default_delete<ColaMan::Window>>”需要有 dll 接口由 class“ColaMan::Application”的客户端使用
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Application.h(18): message : 参见“std::unique_ptr<ColaMan::Window,std::default_delete<ColaMan::Window>>”的声明
+G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Application.h(19,27): warning C4251: “ColaMan::Application::m_Window”: class“std::unique_ptr<ColaMan::Window,std::default_delete<ColaMan::Window>>”需要有 dll 接口由 class“ColaMan::Application”的客户端使用
+G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Application.h(19): message : 参见“std::unique_ptr<ColaMan::Window,std::default_delete<ColaMan::Window>>”的声明
 G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Log.h(18,42): warning C4251: “ColaMan::Log::s_CoreLogger”: class“std::shared_ptr<spdlog::logger>”需要有 dll 接口由 class“ColaMan::Log”的客户端使用
 G:\ColaManEngine\DX3D12\CM_Engine\vendor\spdlog\include\spdlog\details\registry.h(34): message : 参见“std::shared_ptr<spdlog::logger>”的声明
 G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Log.h(19,42): warning C4251: “ColaMan::Log::s_ClientLogger”: class“std::shared_ptr<spdlog::logger>”需要有 dll 接口由 class“ColaMan::Log”的客户端使用
