@@ -22,6 +22,12 @@ namespace ColaMan {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 		CM_CORE_INFO("{0}",e);
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
+		{
+			(*--it)->OnEvent(e);
+			if (e.m_Handled)
+				break;
+		}
 	}
 	
 	int Application::Run(HINSTANCE hInstance)
@@ -34,7 +40,10 @@ namespace ColaMan {
 
 			while (m_Running)
 			{
-				
+				for (Layer* layer : m_LayerStack)
+				{
+					layer->OnUpdate();
+				}
 				theApp.Run();
 				m_Window->OnUpdate();
 			}
@@ -52,6 +61,16 @@ namespace ColaMan {
 	{
 		m_Running = false;
 		return true;
+	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* overlay)
+	{
+		m_LayerStack.PushOverlay(overlay);
 	}
 }
 

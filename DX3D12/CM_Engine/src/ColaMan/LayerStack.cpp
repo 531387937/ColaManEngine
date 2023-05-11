@@ -22,4 +22,21 @@ namespace ColaMan {
 	{
 		m_Layers.emplace_back(overlay);
 	}
+
+	void LayerStack::PopLayer(Layer* layer)
+	{
+		auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
+		if (it != m_Layers.end())
+		{
+			m_Layers.erase(it);
+			m_LayerInsert--;
+		}
+	}
+
+	void LayerStack::PopOverlay(Layer* overLay)
+	{
+		auto it = std::find(m_Layers.begin(), m_Layers.end(), overLay);
+		if (it != m_Layers.end())
+			m_Layers.erase(it);
+	}
 }

@@ -3,6 +3,7 @@
 #include "hzpch.h"
 
 #include <iostream>
+
 #include <memory>
 #include <utility>
 #include <algorithm>
@@ -13,6 +14,8 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+
+#include "ColaMan/Core.h"
 
 #include "ColaMan/Log.h"
 

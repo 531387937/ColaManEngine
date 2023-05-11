@@ -11,6 +11,11 @@ configurations
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["ImGui"] = "CM_Engine/vendor/imgui/include"
+
+include "CM_Engine/vendor/imgui"
+
 project "CM_Engine"
 	location "CM_Engine"
 	kind "SharedLib"
@@ -31,7 +36,13 @@ project "CM_Engine"
 	includedirs
 	{
 		"%{prj.name}/vendor/spdlog/include;",
-		"%{prj.name}/src;"
+		"%{prj.name}/src;",
+		"%{IncludeDir.ImGui}"
+	}
+
+	links
+	{
+		"ImGui"
 	}
 
 	filter "system:windows"
@@ -53,14 +64,17 @@ project "CM_Engine"
 
 		filter "configurations:Debug"
 			defines "CM_DEBUG"
+			buildoptions "/MDd"
 			symbols "On"
 
 		filter "configurations:Release"
 			defines "CM_RELEASE"
+			buildoptions "/MD"
 			symbols "On"
 
 		filter "configurations:Dist"
 			defines "CM_DIST"
+			buildoptions "/MD"
 			symbols "On"
 
 project "Sandbox"
@@ -85,7 +99,7 @@ project "Sandbox"
 
 	links
 	{
-		"CM_Engine"
+		"CM_Engine",
 	}
 
 	filter "system:windows"
@@ -101,12 +115,15 @@ project "Sandbox"
 
 		filter "configurations:Debug"
 			defines "CM_DEBUG"
+			buildoptions "/MDd"
 			symbols "On"
 
 		filter "configurations:Release"
 			defines "CM_RELEASE"
+			buildoptions "/MD"
 			symbols "On"
 
 		filter "configurations:Dist"
 			defines "CM_DIST"
+			buildoptions "/MD"
 			symbols "On"

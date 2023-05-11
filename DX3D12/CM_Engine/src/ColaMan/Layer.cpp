@@ -7,9 +7,5 @@ namespace ColaMan {
 
 	}
 
-	Layer::~Layer()
-	{
-
-	}
 
 }
