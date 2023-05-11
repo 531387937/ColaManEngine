@@ -76,6 +76,9 @@
     <ClInclude Include="src\ColaMan\Event\MouseEvent.h">
       <Filter>ColaMan\Event</Filter>
     </ClInclude>
+    <ClInclude Include="src\ColaMan\Layer.h">
+      <Filter>ColaMan</Filter>
+    </ClInclude>
     <ClInclude Include="src\ColaMan\Log.h">
       <Filter>ColaMan</Filter>
     </ClInclude>
@@ -117,6 +120,9 @@
     </ClCompile>
     <ClCompile Include="src\ColaMan\DirectX12\d3dUtil.cpp">
       <Filter>ColaMan\DirectX12</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ColaMan\Layer.cpp">
+      <Filter>ColaMan</Filter>
     </ClCompile>
     <ClCompile Include="src\ColaMan\Log.cpp">
       <Filter>ColaMan</Filter>
