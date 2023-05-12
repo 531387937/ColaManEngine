@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>hzpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_WINDLL;CM_BUILD_DLL;CM_PLATFORM_WINDOWS;CM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;;src;;vendor\imgui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;;src;;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -102,7 +102,7 @@
       <PrecompiledHeaderFile>hzpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_WINDLL;CM_BUILD_DLL;CM_PLATFORM_WINDOWS;CM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;;src;;vendor\imgui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;;src;;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -124,7 +124,7 @@
       <PrecompiledHeaderFile>hzpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_WINDLL;CM_BUILD_DLL;CM_PLATFORM_WINDOWS;CM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;;src;;vendor\imgui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;;src;;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -161,9 +161,11 @@
     <ClInclude Include="src\ColaMan\Event\Event.h" />
     <ClInclude Include="src\ColaMan\Event\KeyEvent.h" />
     <ClInclude Include="src\ColaMan\Event\MouseEvent.h" />
+    <ClInclude Include="src\ColaMan\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\ColaMan\Layer.h" />
     <ClInclude Include="src\ColaMan\LayerStack.h" />
     <ClInclude Include="src\ColaMan\Log.h" />
+    <ClInclude Include="src\ColaMan\Platform\DirectX12\imGuiDX12Renderer.h" />
     <ClInclude Include="src\ColaMan\Platform\WindowsWindow.h" />
     <ClInclude Include="src\ColaMan\Window.h" />
     <ClInclude Include="src\hzpch.h" />
@@ -179,9 +181,11 @@
     <ClCompile Include="src\ColaMan\DirectX12\ShapesApp.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\d3dApp.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\d3dUtil.cpp" />
+    <ClCompile Include="src\ColaMan\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\ColaMan\Layer.cpp" />
     <ClCompile Include="src\ColaMan\LayerStack.cpp" />
     <ClCompile Include="src\ColaMan\Log.cpp" />
+    <ClCompile Include="src\ColaMan\Platform\DirectX12\imGuiDX12Renderer.cpp" />
     <ClCompile Include="src\ColaMan\Platform\WindowsWindow.cpp" />
     <ClCompile Include="src\hzpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

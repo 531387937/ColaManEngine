@@ -12,7 +12,7 @@ configurations
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
-IncludeDir["ImGui"] = "CM_Engine/vendor/imgui/include"
+IncludeDir["ImGui"] = "CM_Engine/vendor/imgui"
 
 include "CM_Engine/vendor/imgui"
 
