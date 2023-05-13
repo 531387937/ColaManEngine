@@ -86,6 +86,10 @@ public:
     ~ShapesApp();
     
     bool Initialize() override;
+
+    void ExcuteCommand() override;
+
+    ID3D12DescriptorHeap* GetImGuiDescHeap() override;
     
 private:
     void OnMouseDown(WPARAM btnState, int x, int y) override;
@@ -120,6 +124,7 @@ private:
     ComPtr<ID3D12DescriptorHeap> mCbvHeap = nullptr;
 
     ComPtr<ID3D12DescriptorHeap> mSrvDescriptorHeap = nullptr;
+    ComPtr<ID3D12DescriptorHeap> mSrvImGuiHeap = nullptr;
     std::unordered_map<std::string,std::unique_ptr<MeshGeometry>> mGeometries;
     std::unordered_map<std::string,ComPtr<ID3DBlob>> mShaders;
     std::unordered_map<std::string,ComPtr<ID3D12PipelineState>> mPSOs;

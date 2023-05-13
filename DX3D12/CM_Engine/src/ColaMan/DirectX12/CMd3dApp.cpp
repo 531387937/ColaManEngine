@@ -6,11 +6,25 @@
 using Microsoft::WRL::ComPtr;
 using namespace std;
 using namespace DirectX;
-
 CMD3DApp* CMD3DApp::mApp = nullptr;
 CMD3DApp* CMD3DApp::GetApp()
 {
 	return mApp;
+}
+
+ID3D12Device** CMD3DApp::GetDevice()
+{
+	return md3dDevice.GetAddressOf();
+}
+
+ID3D12GraphicsCommandList* CMD3DApp::GetCommandList()
+{
+	return mCommandList.Get();
+}
+
+HWND CMD3DApp::GetWindow()
+{
+	return mhMainWnd;
 }
 
 CMD3DApp::CMD3DApp(HWND window):mhMainWnd(window)

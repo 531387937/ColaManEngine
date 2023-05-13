@@ -2,11 +2,14 @@
 #include "ImGuiLayer.h"
 #include "ColaMan/DirectX12/ShapesApp.h"
 #include"ColaMan/Platform/DirectX12/imGuiDX12Renderer.h"
-#include <examples/imgui_impl_win32.h>
+#include "ColaMan/Platform/DirectX12/imGuiWin32Renderer.h"
 
 namespace ColaMan {
-	ImGuiLayer::ImGuiLayer() :Layer("ImGuiLayer") {
 
+	//static Microsoft::WRL::ComPtr <ID3D12DescriptorHeap> mSrvDescHeap = nullptr;
+
+	ImGuiLayer::ImGuiLayer() :Layer("ImGuiLayer") {
+		OnAttach();
 	}
 
 	ImGuiLayer::~ImGuiLayer()
@@ -23,8 +26,29 @@ namespace ColaMan {
 		static bool show = true;
 		ImGui::ShowDemoWindow(&show);
 
+		static int counter = 0;
+		//test1    控制旋转
+		ImGui::Begin("WangMeifo!Test");                          // Create a window called "Hello, world!" and append into it.
+
+		ImGui::Text("Drag the slider to rotate the Angle of the Box.");               // Display some text (you can use a format strings too)
+		ImGui::Checkbox("Demo Window", &show);      // Edit bools storing our window open/close state
+
+		//ImGui::SliderFloat("float", &mPhi, 0.1f, 1.0f);  //mPhi立方体的旋转角度
+		// Edit 1 float using a slider from 0.0f to 1.0f
+
+		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+			counter++;
+		ImGui::SameLine();
+		ImGui::Text("counter = %d", counter);
+
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		ImGui::End();
+
 		ImGui::Render();
-		ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData());
+		CMD3DApp::GetApp()->GetCommandList()->SetDescriptorHeaps(1, mSrvDescHeap.GetAddressOf());
+		ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(),CMD3DApp::GetApp()->GetCommandList());
+
+		CMD3DApp::GetApp()->ExcuteCommand();
 	}
 
 	void ImGuiLayer::OnEvent(Event& event)
@@ -33,16 +57,7 @@ namespace ColaMan {
 	}
 	void ImGuiLayer::OnAttach()
 	{
-		WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, DefWindowProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("ImGui Example"), NULL };
-		::RegisterClassEx(&wc);
-		HWND hwnd = ::CreateWindow(wc.lpszClassName, _T("Dear ImGui DirectX12 Example"), WS_OVERLAPPEDWINDOW, 100, 100, 1280, 800, NULL, NULL, wc.hInstance, NULL);
-
-		// Initialize Direct3D
-
-
-		// Show the window
-		::ShowWindow(hwnd, SW_SHOWDEFAULT);
-		::UpdateWindow(hwnd);
+		
 
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -76,9 +91,20 @@ namespace ColaMan {
 		io.KeyMap[ImGuiKey_Y] = 'Y';
 		io.KeyMap[ImGuiKey_Z] = 'Z';
 
-		ShapesApp app(hwnd);
+		D3D12_DESCRIPTOR_HEAP_DESC SrvHeapDesc;
+		SrvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+		SrvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+		SrvHeapDesc.NodeMask = 0;
+		SrvHeapDesc.NumDescriptors = 1;
+		auto heap = CMD3DApp::GetApp()->GetImGuiDescHeap();
+		//ThrowIfFailed((*CMD3DApp::GetApp()->GetDevice())->CreateDescriptorHeap(&SrvHeapDesc, IID_PPV_ARGS(mSrvDescHeap.GetAddressOf())));
 
-		ImGui_ImplWin32_Init(hwnd);
+
+		ImGui_ImplWin32_Init(CMD3DApp::GetApp()->GetWindow());
+		ImGui_ImplDX12_Init((*CMD3DApp::GetApp()->GetDevice()), 2, DXGI_FORMAT_R8G8B8A8_UNORM, mSrvDescHeap.Get(),
+			mSrvDescHeap.Get()->GetCPUDescriptorHandleForHeapStart(),
+			mSrvDescHeap.Get()->GetGPUDescriptorHandleForHeapStart());
+		CM_CORE_TRACE("ImGui Attach!");
 	}
 	void ImGuiLayer::OnDetach()
 	{

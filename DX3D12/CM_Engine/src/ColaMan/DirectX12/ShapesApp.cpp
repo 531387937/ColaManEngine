@@ -41,6 +41,26 @@ bool ShapesApp::Initialize()
 	return true;
 }
 
+void ShapesApp::ExcuteCommand()
+{
+	ThrowIfFailed(mCommandList->Close());
+	ID3D12CommandList* cmdsList[] = { mCommandList.Get() };
+
+	mCommandQueue->ExecuteCommandLists(_countof(cmdsList), cmdsList);
+
+	ThrowIfFailed(mSwapChain->Present(0, 0));
+	mCurrBackBuffer = (mCurrBackBuffer + 1) % SwapChainBufferCount;
+
+	mCurrFrameResource->Fence = ++mCurrentFence;
+
+	mCommandQueue->Signal(mFence.Get(), mCurrentFence);
+}
+
+ID3D12DescriptorHeap* ShapesApp::GetImGuiDescHeap()
+{
+	return mSrvImGuiHeap.Get();
+}
+
 void ShapesApp::OnResize()
 {
 	CMD3DApp::OnResize();
@@ -109,18 +129,6 @@ void ShapesApp::Draw(const GameTimer& gt)
 	mCommandList->ResourceBarrier(
 		1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(), D3D12_RESOURCE_STATE_RENDER_TARGET,
 			D3D12_RESOURCE_STATE_PRESENT));
-
-	ThrowIfFailed(mCommandList->Close());
-	ID3D12CommandList* cmdsList[] = { mCommandList.Get() };
-
-	mCommandQueue->ExecuteCommandLists(_countof(cmdsList), cmdsList);
-
-	ThrowIfFailed(mSwapChain->Present(0, 0));
-	mCurrBackBuffer = (mCurrBackBuffer + 1) % SwapChainBufferCount;
-
-	mCurrFrameResource->Fence = ++mCurrentFence;
-
-	mCommandQueue->Signal(mFence.Get(), mCurrentFence);
 }
 
 void ShapesApp::OnMouseDown(WPARAM btnState, int x, int y)
@@ -259,6 +267,14 @@ void ShapesApp::BuildDescriptorHeaps()
 	heapDesc.NodeMask = 0;
 	heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	ThrowIfFailed(md3dDevice->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&mCbvHeap)));
+
+	D3D12_DESCRIPTOR_HEAP_DESC SrvHeapDesc;
+	SrvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+	SrvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+	SrvHeapDesc.NodeMask = 0;
+	SrvHeapDesc.NumDescriptors = 1;
+
+	ThrowIfFailed(md3dDevice->CreateDescriptorHeap(&SrvHeapDesc, IID_PPV_ARGS(mSrvImGuiHeap.GetAddressOf())));
 }
 
 void ShapesApp::BuildConstantsBufferViews()

@@ -1,5 +1,6 @@
 #include <wtypes.h>
 #include "ColaMan.h"
+#include "ColaMan/ImGui/ImGuiLayer.h"
 
 class TestLayer :public ColaMan::Layer
 {
@@ -28,7 +29,7 @@ public:
 		
 	}
 	Sandbox(HINSTANCE hInstance) :Application(hInstance) {
-		PushLayer(new TestLayer());
+		PushLayer(new ColaMan::ImGuiLayer());
 	}
 	~Sandbox()
 	{
@@ -39,7 +40,7 @@ public:
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE preInstance, PSTR cmdLine, int showCmd)
 {
-	//AllocConsole();
+	AllocConsole();
 
 	ColaMan::Log::Init();
 	CM_CORE_WARN("Initialized log!");

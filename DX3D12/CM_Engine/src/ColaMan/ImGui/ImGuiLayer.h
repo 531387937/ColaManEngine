@@ -1,8 +1,9 @@
 #pragma once
 #include "ColaMan/Layer.h"
-
+#include <wrl/client.h>
+#include <d3d12.h>
 namespace ColaMan {
-	class ImGuiLayer : public Layer
+	class CM_API ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();
@@ -13,6 +14,8 @@ namespace ColaMan {
 		void OnAttach();
 		void OnDetach();
 
-	private:
+	public:
+		Microsoft::WRL::ComPtr <ID3D12DescriptorHeap> mSrvDescHeap = nullptr;
+		
 	};
 }

@@ -97,6 +97,9 @@
     <ClInclude Include="src\ColaMan\Platform\DirectX12\imGuiDX12Renderer.h">
       <Filter>ColaMan\Platform\DirectX12</Filter>
     </ClInclude>
+    <ClInclude Include="src\ColaMan\Platform\DirectX12\imGuiWin32Renderer.h">
+      <Filter>ColaMan\Platform\DirectX12</Filter>
+    </ClInclude>
     <ClInclude Include="src\ColaMan\Platform\WindowsWindow.h">
       <Filter>ColaMan\Platform</Filter>
     </ClInclude>
@@ -149,6 +152,9 @@
       <Filter>ColaMan</Filter>
     </ClCompile>
     <ClCompile Include="src\ColaMan\Platform\DirectX12\imGuiDX12Renderer.cpp">
+      <Filter>ColaMan\Platform\DirectX12</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ColaMan\Platform\DirectX12\imGuiWin32Renderer.cpp">
       <Filter>ColaMan\Platform\DirectX12</Filter>
     </ClCompile>
     <ClCompile Include="src\ColaMan\Platform\WindowsWindow.cpp">

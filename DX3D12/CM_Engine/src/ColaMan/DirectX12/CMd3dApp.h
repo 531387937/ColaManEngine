@@ -26,6 +26,13 @@ public:
 
     static CMD3DApp* GetApp();
 
+    ID3D12Device** GetDevice();
+
+    ID3D12GraphicsCommandList* GetCommandList();
+
+
+    HWND GetWindow();
+
     float     AspectRatio()const;
 
     bool Get4xMsaaState()const;
@@ -35,6 +42,9 @@ public:
 
     virtual bool Initialize();
     virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+    virtual void ExcuteCommand() = 0;
+
+    virtual ID3D12DescriptorHeap* GetImGuiDescHeap() = 0;
 
 protected:
     virtual void CreateRtvAndDsvDescriptorHeaps();

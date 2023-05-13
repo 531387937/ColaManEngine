@@ -166,6 +166,7 @@
     <ClInclude Include="src\ColaMan\LayerStack.h" />
     <ClInclude Include="src\ColaMan\Log.h" />
     <ClInclude Include="src\ColaMan\Platform\DirectX12\imGuiDX12Renderer.h" />
+    <ClInclude Include="src\ColaMan\Platform\DirectX12\imGuiWin32Renderer.h" />
     <ClInclude Include="src\ColaMan\Platform\WindowsWindow.h" />
     <ClInclude Include="src\ColaMan\Window.h" />
     <ClInclude Include="src\hzpch.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="src\ColaMan\LayerStack.cpp" />
     <ClCompile Include="src\ColaMan\Log.cpp" />
     <ClCompile Include="src\ColaMan\Platform\DirectX12\imGuiDX12Renderer.cpp" />
+    <ClCompile Include="src\ColaMan\Platform\DirectX12\imGuiWin32Renderer.cpp" />
     <ClCompile Include="src\ColaMan\Platform\WindowsWindow.cpp" />
     <ClCompile Include="src\hzpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

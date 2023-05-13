@@ -15,6 +15,10 @@ namespace ColaMan {
 	{
 		m_Window = std::unique_ptr<Window>(Window::Create(hInstance));
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
+
+		ShapesApp theApp(m_Window->GetWindow());
+		if (!theApp.Initialize())
+			return;
 	}
 
 	void Application::OnEvent(Event& e)
@@ -34,9 +38,7 @@ namespace ColaMan {
 	{
 		try
 		{
-			ShapesApp theApp(m_Window->GetWindow());
-			if (!theApp.Initialize())
-				return 0;
+			ShapesApp* theApp = (ShapesApp*)CMD3DApp::GetApp();
 
 			while (m_Running)
 			{
@@ -44,7 +46,8 @@ namespace ColaMan {
 				{
 					layer->OnUpdate();
 				}
-				theApp.Run();
+				theApp->Run();
+				theApp->ExcuteCommand();
 				m_Window->OnUpdate();
 			}
 			return 0;
