@@ -12,6 +12,13 @@ CMD3DApp* CMD3DApp::GetApp()
 	return mApp;
 }
 
+void CMD3DApp::Resize(float width, float height)
+{
+	mClientWidth = width;
+	mClientHeight = height;
+	OnResize();
+}
+
 
 
 HWND CMD3DApp::GetWindow()
@@ -475,7 +482,6 @@ void CMD3DApp::FlushCommandQueue()
 	// are on the GPU timeline, the new fence point won't be set until the GPU finishes
 	// processing all the commands prior to this Signal().
 	ThrowIfFailed(mCommandQueue->Signal(mFence.Get(), mCurrentFence));
-
 	// Wait until the GPU has completed commands up to this fence point.
 	if (mFence->GetCompletedValue() < mCurrentFence)
 	{

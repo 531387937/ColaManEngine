@@ -187,8 +187,22 @@ namespace ColaMan {
 				}
 				case WM_MOUSEWHEEL:
 				{
-					MouseScrolledEvent mouseScrolledEvent(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+					MouseScrolledEvent mouseScrolledEvent(0, (float)GET_WHEEL_DELTA_WPARAM(wParam) / (float)WHEEL_DELTA);
 					pData->EventCallback(mouseScrolledEvent);
+					return 0;
+					break;
+				}
+				case WM_MOUSEHWHEEL:
+				{
+					MouseScrolledEvent mouseScrolledEvent((float)GET_WHEEL_DELTA_WPARAM(wParam) / (float)WHEEL_DELTA, 0);
+					pData->EventCallback(mouseScrolledEvent);
+					return 0;
+					break;
+				}
+				case WM_CHAR:
+				{
+					KeyTypedEvent keyTypeEvent(wParam);
+					pData->EventCallback(keyTypeEvent);
 					return 0;
 					break;
 				}

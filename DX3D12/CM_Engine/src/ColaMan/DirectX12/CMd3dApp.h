@@ -25,7 +25,7 @@ protected:
 public:
 
     static CMD3DApp* GetApp();
-
+    void Resize(float width, float height);
     virtual ID3D12Device* GetDevice() = 0;
 
     virtual ID3D12GraphicsCommandList* GetCommandList() = 0;

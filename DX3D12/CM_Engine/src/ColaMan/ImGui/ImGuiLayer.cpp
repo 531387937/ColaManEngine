@@ -46,6 +46,11 @@ namespace ColaMan {
 		ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(),CMD3DApp::GetApp()->GetCommandList());
 
 		CMD3DApp::GetApp()->ExcuteCommand();
+		if (m_Resize)
+		{
+			CMD3DApp::GetApp()->Resize(io.DisplaySize.x, io.DisplaySize.y);
+		}
+		m_Resize = false;
 	}
 
 	void ImGuiLayer::OnEvent(Event& event)
@@ -130,21 +135,40 @@ namespace ColaMan {
 
 	bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent& e)
 	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.KeysDown[e.GetKeyCode()] = true;
+
+		io.KeyCtrl = io.KeysDown[VK_LCONTROL] || io.KeysDown[VK_RCONTROL];
+		io.KeyShift = io.KeysDown[VK_LSHIFT] || io.KeysDown[VK_RSHIFT];
+		io.KeyAlt = io.KeysDown[VK_LMENU] || io.KeysDown[VK_RMENU];
+		io.KeySuper = io.KeysDown[VK_LWIN] || io.KeysDown[VK_RWIN];
 		return false;
 	}
 
 	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e)
 	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.KeysDown[e.GetKeyCode()] = false;
 		return false;
 	}
 
 	bool ImGuiLayer::OnKeyTypedEvent(KeyTypedEvent& e)
 	{
+		ImGuiIO& io = ImGui::GetIO();
+		auto c = e.GetKeyCode();
+		if (c > 0 && c < 0x10000)
+		{
+			io.AddInputCharacter((unsigned short)c);
+		}
 		return false;
 	}
 
 	bool ImGuiLayer::OnWindowResizedEvent(WindowResizeEvent& e)
 	{
+		m_Resize = true;
+		ImGuiIO& io = ImGui::GetIO();
+		io.DisplaySize = ImVec2(e.GetWidth(), e.GetHeight());
+		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
 		return false;
 	}
 
