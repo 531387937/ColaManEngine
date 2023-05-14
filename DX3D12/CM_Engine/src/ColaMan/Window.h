@@ -36,7 +36,7 @@ namespace ColaMan {
 		virtual bool IsVSync() const = 0;
 #ifdef CM_PLATFORM_WINDOWS
 		static Window* Create(HINSTANCE hInstance, const WindowProps& props = WindowProps());
-		virtual HWND GetWindow() const = 0;
+		virtual void* GetNativeWindow() const = 0;
 #else 
 		static Window* Create(const WindowProps& props = WindowProps());
 #endif

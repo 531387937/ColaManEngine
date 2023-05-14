@@ -162,12 +162,14 @@
     <ClInclude Include="src\ColaMan\Event\KeyEvent.h" />
     <ClInclude Include="src\ColaMan\Event\MouseEvent.h" />
     <ClInclude Include="src\ColaMan\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\ColaMan\Input.h" />
     <ClInclude Include="src\ColaMan\Layer.h" />
     <ClInclude Include="src\ColaMan\LayerStack.h" />
     <ClInclude Include="src\ColaMan\Log.h" />
     <ClInclude Include="src\ColaMan\Platform\DirectX12\imGuiDX12Renderer.h" />
     <ClInclude Include="src\ColaMan\Platform\DirectX12\imGuiWin32Renderer.h" />
-    <ClInclude Include="src\ColaMan\Platform\WindowsWindow.h" />
+    <ClInclude Include="src\ColaMan\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\ColaMan\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\ColaMan\Window.h" />
     <ClInclude Include="src\hzpch.h" />
   </ItemGroup>
@@ -188,7 +190,8 @@
     <ClCompile Include="src\ColaMan\Log.cpp" />
     <ClCompile Include="src\ColaMan\Platform\DirectX12\imGuiDX12Renderer.cpp" />
     <ClCompile Include="src\ColaMan\Platform\DirectX12\imGuiWin32Renderer.cpp" />
-    <ClCompile Include="src\ColaMan\Platform\WindowsWindow.cpp" />
+    <ClCompile Include="src\ColaMan\Platform\Windows\WindowsInput.cpp" />
+    <ClCompile Include="src\ColaMan\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\hzpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

@@ -1,6 +1,7 @@
 #include "hzpch.h"
 #include "Application.h"
 #include "DirectX12/ShapesApp.h"
+#include "ColaMan/Platform/Windows/WindowsInput.h"
 
 namespace ColaMan {
 #define BIND_EVENT_FN(x) std::bind(&Application::x,this,std::placeholders::_1)
@@ -20,7 +21,7 @@ namespace ColaMan {
 		m_Window = std::unique_ptr<Window>(Window::Create(hInstance));
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
-		static ShapesApp theApp(m_Window->GetWindow());
+		static ShapesApp theApp((HWND)m_Window->GetNativeWindow());
 		if (!theApp.Initialize())
 			return;
 	}
@@ -47,6 +48,10 @@ namespace ColaMan {
 			while (m_Running)
 			{
 				theApp->Run();
+				if (Input::GetMouseX())
+				{
+					CM_TRACE("Mouse!!!!!!!!!!!!{0}", Input::GetMouseX());
+				}
 				m_Window->OnUpdate();
 				for (Layer* layer : m_LayerStack)
 				{
