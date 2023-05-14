@@ -137,19 +137,43 @@ namespace ColaMan {
 					break;
 				}
 				case WM_LBUTTONDOWN:
+				{
+					MouseButtonPressedEvent mousePressedEvent(0);
+					pData->EventCallback(mousePressedEvent);
+					return 0;
+					break;
+				}
 				case WM_MBUTTONDOWN:
+				{
+					MouseButtonPressedEvent mousePressedEvent(2);
+					pData->EventCallback(mousePressedEvent);
+					return 0;
+					break;
+				}
 				case WM_RBUTTONDOWN:
 				{
-					MouseButtonPressedEvent mousePressedEvent(wParam);
+					MouseButtonPressedEvent mousePressedEvent(1);
 					pData->EventCallback(mousePressedEvent);
 					return 0;
 					break;
 				}
 				case WM_LBUTTONUP:
+				{
+					MouseButtonReleasedEvent mouseReleasedEvent(0);
+					pData->EventCallback(mouseReleasedEvent);
+					return 0;
+					break;
+				}
 				case WM_MBUTTONUP:
+				{
+					MouseButtonReleasedEvent mouseReleasedEvent(2);
+					pData->EventCallback(mouseReleasedEvent);
+					return 0;
+					break;
+				}
 				case WM_RBUTTONUP:
 				{
-					MouseButtonReleasedEvent mouseReleasedEvent(wParam);
+					MouseButtonReleasedEvent mouseReleasedEvent(1);
 					pData->EventCallback(mouseReleasedEvent);
 					return 0;
 					break;

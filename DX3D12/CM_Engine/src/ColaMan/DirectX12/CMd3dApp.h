@@ -26,9 +26,11 @@ public:
 
     static CMD3DApp* GetApp();
 
-    ID3D12Device** GetDevice();
+    virtual ID3D12Device* GetDevice() = 0;
 
-    ID3D12GraphicsCommandList* GetCommandList();
+    virtual ID3D12GraphicsCommandList* GetCommandList() = 0;
+
+    GameTimer& DX12GetTime() { return mTimer; }
 
 
     HWND GetWindow();
@@ -43,7 +45,7 @@ public:
     virtual bool Initialize();
     virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
     virtual void ExcuteCommand() = 0;
-
+   
     virtual ID3D12DescriptorHeap* GetImGuiDescHeap() = 0;
 
 protected:
@@ -96,13 +98,14 @@ protected:
     Microsoft::WRL::ComPtr<IDXGIFactory4> mdxgiFactory;
     Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
     Microsoft::WRL::ComPtr<ID3D12Device> md3dDevice;
+    Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> mCommandList;
 
     Microsoft::WRL::ComPtr<ID3D12Fence> mFence;
     UINT64 mCurrentFence = 0;
 
     Microsoft::WRL::ComPtr<ID3D12CommandQueue> mCommandQueue;
     Microsoft::WRL::ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;
-    Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> mCommandList;
+    
 
     static const int SwapChainBufferCount = 2;
     int mCurrBackBuffer = 0;

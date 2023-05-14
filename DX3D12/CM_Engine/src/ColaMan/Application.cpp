@@ -4,6 +4,8 @@
 
 namespace ColaMan {
 #define BIND_EVENT_FN(x) std::bind(&Application::x,this,std::placeholders::_1)
+
+	Application* Application::Instance = nullptr;
 	Application::Application()
 	{
 	}
@@ -13,10 +15,12 @@ namespace ColaMan {
 	}
 	Application::Application(HINSTANCE hInstance)
 	{
+		if(!Instance)
+			Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create(hInstance));
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
-		ShapesApp theApp(m_Window->GetWindow());
+		static ShapesApp theApp(m_Window->GetWindow());
 		if (!theApp.Initialize())
 			return;
 	}
@@ -42,13 +46,14 @@ namespace ColaMan {
 
 			while (m_Running)
 			{
+				theApp->Run();
+				m_Window->OnUpdate();
 				for (Layer* layer : m_LayerStack)
 				{
 					layer->OnUpdate();
 				}
-				theApp->Run();
-				theApp->ExcuteCommand();
-				m_Window->OnUpdate();
+				//theApp->ExcuteCommand();
+				
 			}
 			return 0;
 			

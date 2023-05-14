@@ -15,6 +15,16 @@ ShapesApp::~ShapesApp()
 		FlushCommandQueue();
 }
 
+ID3D12Device* ShapesApp::GetDevice()
+{
+	return md3dDevice.Get();
+}
+
+ID3D12GraphicsCommandList* ShapesApp::GetCommandList()
+{
+	return mCommandList.Get();
+}
+
 bool ShapesApp::Initialize()
 {
 	if (!CMD3DApp::Initialize())
@@ -43,6 +53,9 @@ bool ShapesApp::Initialize()
 
 void ShapesApp::ExcuteCommand()
 {
+	mCommandList->ResourceBarrier(
+		1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(), D3D12_RESOURCE_STATE_RENDER_TARGET,
+			D3D12_RESOURCE_STATE_PRESENT));
 	ThrowIfFailed(mCommandList->Close());
 	ID3D12CommandList* cmdsList[] = { mCommandList.Get() };
 
@@ -126,9 +139,7 @@ void ShapesApp::Draw(const GameTimer& gt)
 
 	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
-	mCommandList->ResourceBarrier(
-		1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(), D3D12_RESOURCE_STATE_RENDER_TARGET,
-			D3D12_RESOURCE_STATE_PRESENT));
+	
 }
 
 void ShapesApp::OnMouseDown(WPARAM btnState, int x, int y)

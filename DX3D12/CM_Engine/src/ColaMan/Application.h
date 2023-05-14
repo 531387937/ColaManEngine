@@ -11,8 +11,11 @@ namespace ColaMan {
 	class CM_API Application
 	{
 	public:
+
 		Application();
 		Application(HINSTANCE hInstance);
+
+		static Application* Instance;
 		virtual ~Application();
 
 		int Run(HINSTANCE hInstance);
@@ -21,6 +24,8 @@ namespace ColaMan {
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
+
+		inline Window& GetWindow() { return *m_Window; }
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);

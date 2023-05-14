@@ -84,13 +84,17 @@ public:
     ShapesApp(const ShapesApp& rhs) = delete;
     ShapesApp& operator=(const ShapesApp& rhs) = delete;
     ~ShapesApp();
+
+    ID3D12Device* GetDevice() override;
+
+    ID3D12GraphicsCommandList* GetCommandList() override;
     
     bool Initialize() override;
 
     void ExcuteCommand() override;
 
     ID3D12DescriptorHeap* GetImGuiDescHeap() override;
-    
+    ComPtr<ID3D12DescriptorHeap> mSrvImGuiHeap = nullptr;
 private:
     void OnMouseDown(WPARAM btnState, int x, int y) override;
     void OnMouseMove(WPARAM btnState, int x, int y) override;
@@ -124,7 +128,7 @@ private:
     ComPtr<ID3D12DescriptorHeap> mCbvHeap = nullptr;
 
     ComPtr<ID3D12DescriptorHeap> mSrvDescriptorHeap = nullptr;
-    ComPtr<ID3D12DescriptorHeap> mSrvImGuiHeap = nullptr;
+    
     std::unordered_map<std::string,std::unique_ptr<MeshGeometry>> mGeometries;
     std::unordered_map<std::string,ComPtr<ID3DBlob>> mShaders;
     std::unordered_map<std::string,ComPtr<ID3D12PipelineState>> mPSOs;

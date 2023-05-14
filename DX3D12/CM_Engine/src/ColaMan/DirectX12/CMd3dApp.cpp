@@ -12,15 +12,7 @@ CMD3DApp* CMD3DApp::GetApp()
 	return mApp;
 }
 
-ID3D12Device** CMD3DApp::GetDevice()
-{
-	return md3dDevice.GetAddressOf();
-}
 
-ID3D12GraphicsCommandList* CMD3DApp::GetCommandList()
-{
-	return mCommandList.Get();
-}
 
 HWND CMD3DApp::GetWindow()
 {
@@ -32,7 +24,10 @@ CMD3DApp::CMD3DApp(HWND window):mhMainWnd(window)
 	// Only one CMD3DApp can be constructed.
 	assert(mApp == nullptr);
 	mApp = this;
-
+	RECT* rect = new RECT();
+	GetClientRect(window, rect);
+	mClientWidth = rect->right-rect->left;
+	mClientHeight = rect->bottom-rect->top;
 	mTimer.Reset();
 }
 
@@ -411,7 +406,6 @@ bool CMD3DApp::InitDirect3D()
 #ifdef _DEBUG
 	LogAdapters();
 #endif
-
 	CreateCommandObjects();
 	CreateSwapChain();
 	CreateRtvAndDsvDescriptorHeaps();
