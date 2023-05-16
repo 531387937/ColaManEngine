@@ -4,6 +4,7 @@
 #include "ColaMan/Platform/Windows/WindowsInput.h"
 
 namespace ColaMan {
+
 #define BIND_EVENT_FN(x) std::bind(&Application::x,this,std::placeholders::_1)
 
 	Application* Application::Instance = nullptr;
@@ -24,6 +25,9 @@ namespace ColaMan {
 		static ShapesApp theApp((HWND)m_Window->GetNativeWindow());
 		if (!theApp.Initialize())
 			return;
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	void Application::OnEvent(Event& e)
@@ -57,6 +61,12 @@ namespace ColaMan {
 				{
 					layer->OnUpdate();
 				}
+				m_ImGuiLayer->Begin();
+				for (Layer* layer : m_LayerStack)
+				{
+					layer->OnImGuiRender();
+				}
+				m_ImGuiLayer->End();
 				//theApp->ExcuteCommand();
 				
 			}

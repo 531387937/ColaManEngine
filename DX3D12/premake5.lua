@@ -94,7 +94,8 @@ project "Sandbox"
 	includedirs
 	{
 		"CM_Engine/vendor/spdlog/include;",
-		"CM_Engine/src"
+		"CM_Engine/src",
+		"CM_Engine/vendor"
 	}
 
 	links

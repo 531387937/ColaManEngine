@@ -1,5 +1,6 @@
 #include <wtypes.h>
 #include "ColaMan.h"
+#include "imgui/imgui.h"
 #include "ColaMan/ImGui/ImGuiLayer.h"
 
 class TestLayer :public ColaMan::Layer
@@ -12,12 +13,19 @@ public:
 
 	void OnUpdate() override
 	{
-		CM_INFO("TesteLayer::Update");
+		//CM_INFO("TesteLayer::Update");
 	}
 
 	void OnEvent(ColaMan::Event& event) override
 	{
-		CM_TRACE("{0}", event);
+		//CM_TRACE("{0}", event);
+	}
+
+	void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World!");
+		ImGui::End();
 	}
 };
 
@@ -29,7 +37,7 @@ public:
 		
 	}
 	Sandbox(HINSTANCE hInstance) :Application(hInstance) {
-		PushLayer(new ColaMan::ImGuiLayer());
+		PushLayer(new TestLayer());
 	}
 	~Sandbox()
 	{

@@ -12,11 +12,15 @@ namespace ColaMan {
 		ImGuiLayer();
 		~ImGuiLayer();
 
-		void OnUpdate();
-		void OnEvent(Event& event);
-		void OnAttach();
-		void OnDetach();
-
+		
+		
+		virtual void OnAttach() override;
+		virtual void OnDetach() override;
+		virtual void OnUpdate() override;
+		virtual void OnEvent(Event& e) override;
+		virtual void OnImGuiRender() override;
+		void Begin();
+		void End();
 	private:
 		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
 		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
@@ -26,7 +30,6 @@ namespace ColaMan {
 		bool OnKeyReleasedEvent(KeyReleasedEvent& e);
 		bool OnKeyTypedEvent(KeyTypedEvent& e);
 		bool OnWindowResizedEvent(WindowResizeEvent& e);
-	private:
 		Microsoft::WRL::ComPtr <ID3D12DescriptorHeap> mSrvDescHeap = nullptr;
 		bool m_Resize = false;
 		float m_Time = 0.0f;

@@ -1,21 +1,3 @@
-﻿cl : 命令行 warning D9025: 正在重写“/MTd”(用“/MDd”)
-  Application.cpp
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Layer.h(21,15): warning C4251: “ColaMan::Layer::m_DebugName”: class“std::basic_string<char,std::char_traits<char>,std::allocator<char>>”需要有 dll 接口由 class“ColaMan::Layer”的客户端使用
-D:\VS2019\VC\Tools\MSVC\14.29.30133\include\xstring(4871): message : 参见“std::basic_string<char,std::char_traits<char>,std::allocator<char>>”的声明
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\LayerStack.h(24,23): warning C4251: “ColaMan::LayerStack::m_Layers”: class“std::vector<ColaMan::Layer *,std::allocator<ColaMan::Layer *>>”需要有 dll 接口由 class“ColaMan::LayerStack”的客户端使用
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\LayerStack.h(20): message : 参见“std::vector<ColaMan::Layer *,std::allocator<ColaMan::Layer *>>”的声明
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\LayerStack.h(25,33): warning C4251: “ColaMan::LayerStack::m_LayerInsert”: class“std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>”需要有 dll 接口由 class“ColaMan::LayerStack”的客户端使用
-          with
-          [
-              _Ty=ColaMan::Layer *
-          ]
-D:\VS2019\VC\Tools\MSVC\14.29.30133\include\vector(457): message : 参见“std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>”的声明
-          with
-          [
-              _Ty=ColaMan::Layer *
-          ]
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Application.h(33,27): warning C4251: “ColaMan::Application::m_Window”: class“std::unique_ptr<ColaMan::Window,std::default_delete<ColaMan::Window>>”需要有 dll 接口由 class“ColaMan::Application”的客户端使用
-G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\Application.h(33): message : 参见“std::unique_ptr<ColaMan::Window,std::default_delete<ColaMan::Window>>”的声明
-    正在创建库 ..\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.lib 和对象 ..\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.exp
+﻿    正在创建库 ..\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.lib 和对象 ..\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.exp
 LINK : warning LNK4098: 默认库“LIBCMT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
   CM_Engine.vcxproj -> G:\ColaManEngine\DX3D12\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.dll
