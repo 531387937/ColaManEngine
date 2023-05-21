@@ -65,7 +65,7 @@ namespace ColaMan {
 		ImGuiIO& io = ImGui::GetIO();
 		Application* app = Application::Instance;
 
-		io.DisplaySize = ImVec2(app->GetWindow().GetWidth(), app->GetWindow().GetHeight());
+		io.DisplaySize = ImVec2((float)app->GetWindow().GetWidth(), (float)app->GetWindow().GetHeight());
 		ImGui::Render();
 
 		CMD3DApp::GetApp()->GetCommandList()->SetDescriptorHeaps(1, mSrvDescHeap.GetAddressOf());
@@ -76,12 +76,6 @@ namespace ColaMan {
 			ImGui::UpdatePlatformWindows();
 			ImGui::RenderPlatformWindowsDefault(NULL, (void*)CMD3DApp::GetApp()->GetCommandList());
 		}
-		CMD3DApp::GetApp()->ExcuteCommand();
-		if (m_Resize)
-		{
-			CMD3DApp::GetApp()->Resize(io.DisplaySize.x, io.DisplaySize.y);
-		}
-		m_Resize = false;
 	}
 
 	void ImGuiLayer::OnEvent(Event& event)
@@ -212,10 +206,10 @@ namespace ColaMan {
 
 	bool ImGuiLayer::OnWindowResizedEvent(WindowResizeEvent& e)
 	{
-		m_Resize = true;
 		ImGuiIO& io = ImGui::GetIO();
-		io.DisplaySize = ImVec2(e.GetWidth(), e.GetHeight());
+		io.DisplaySize = ImVec2((float)e.GetWidth(), (float)e.GetHeight());
 		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+		CMD3DApp::GetApp()->Resize(io.DisplaySize.x, io.DisplaySize.y);
 		return false;
 	}
 

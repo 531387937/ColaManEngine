@@ -33,8 +33,6 @@ public:
     GameTimer& DX12GetTime() { return mTimer; }
 
 
-    HWND GetWindow();
-
     float     AspectRatio()const;
 
     bool Get4xMsaaState()const;
@@ -129,4 +127,6 @@ protected:
     DXGI_FORMAT mDepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
     int mClientWidth = 800;
     int mClientHeight = 600;
+
+    bool shouldResize = false;
 };

@@ -18,8 +18,11 @@ include "CM_Engine/vendor/imgui"
 
 project "CM_Engine"
 	location "CM_Engine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
 
 	targetdir ("bin/"..outputdir.."/%{prj.name}")
 	objdir ("bin-int/"..outputdir.."/%{prj.name}")
@@ -46,9 +49,7 @@ project "CM_Engine"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
-		systemversion "10.0.19041.0"
+		systemversion "latest"
 
 		defines
 		{
@@ -57,30 +58,28 @@ project "CM_Engine"
 			"CM_PLATFORM_WINDOWS"
 		}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
 
 		filter "configurations:Debug"
 			defines "CM_DEBUG"
-			buildoptions "/MDd"
-			symbols "On"
+			runtime "Debug"
+			symbols "on"
 
 		filter "configurations:Release"
 			defines "CM_RELEASE"
-			buildoptions "/MD"
-			symbols "On"
+			runtime "Release"
+			optimize "on"
 
 		filter "configurations:Dist"
 			defines "CM_DIST"
-			buildoptions "/MD"
-			symbols "On"
+			runtime "Release"
+			optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "WindowedApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/"..outputdir.."/%{prj.name}")
 	objdir ("bin-int/"..outputdir.."/%{prj.name}")
@@ -104,9 +103,8 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		staticruntime "On"
-		systemversion "10.0.19041.0"
+		systemversion "latest"
 
 		defines
 		{
@@ -116,15 +114,15 @@ project "Sandbox"
 
 		filter "configurations:Debug"
 			defines "CM_DEBUG"
-			buildoptions "/MDd"
-			symbols "On"
+			runtime "Debug"
+			symbols "on"
 
 		filter "configurations:Release"
 			defines "CM_RELEASE"
-			buildoptions "/MD"
-			symbols "On"
+			runtime "Release"
+			symbols "on"
 
 		filter "configurations:Dist"
 			defines "CM_DIST"
-			buildoptions "/MD"
-			symbols "On"
+			runtime "Release"
+			symbols "on"

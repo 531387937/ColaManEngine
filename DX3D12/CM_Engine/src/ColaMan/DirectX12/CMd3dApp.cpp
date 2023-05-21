@@ -14,17 +14,12 @@ CMD3DApp* CMD3DApp::GetApp()
 
 void CMD3DApp::Resize(float width, float height)
 {
-	mClientWidth = width;
-	mClientHeight = height;
-	OnResize();
+	mClientWidth = (int)width;
+	mClientHeight = (int)height;
+	shouldResize = true;
 }
 
 
-
-HWND CMD3DApp::GetWindow()
-{
-	return mhMainWnd;
-}
 
 CMD3DApp::CMD3DApp(HWND window):mhMainWnd(window)
 {
@@ -75,6 +70,11 @@ int CMD3DApp::Run()
 
 			if (!mAppPaused)
 			{
+				if (shouldResize)
+				{
+					OnResize();
+					shouldResize = false;
+				}
 				CalculateFrameStats();
 				Update(mTimer);
 				Draw(mTimer);
@@ -125,10 +125,8 @@ void CMD3DApp::OnResize()
 	assert(md3dDevice);
 	assert(mSwapChain);
 	assert(mDirectCmdListAlloc);
-
 	// Flush before changing any resources.
 	FlushCommandQueue();
-
 	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), nullptr));
 
 	// Release the previous resources we will be recreating.
@@ -587,7 +585,6 @@ void CMD3DApp::LogAdapterOutputs(IDXGIAdapter* adapter)
 		text += desc.DeviceName;
 		text += L"\n";
 		OutputDebugString(text.c_str());
-
 		LogOutputDisplayModes(output, mBackBufferFormat);
 
 		ReleaseCom(output);

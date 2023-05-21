@@ -32,10 +32,7 @@ public:
 class Sandbox :public ColaMan::Application
 {
 public:
-	Sandbox()
-	{
-		
-	}
+	Sandbox() = delete;
 	Sandbox(HINSTANCE hInstance) :Application(hInstance) {
 		PushLayer(new TestLayer());
 	}

@@ -31,7 +31,6 @@ namespace ColaMan {
 		bool OnKeyTypedEvent(KeyTypedEvent& e);
 		bool OnWindowResizedEvent(WindowResizeEvent& e);
 		Microsoft::WRL::ComPtr <ID3D12DescriptorHeap> mSrvDescHeap = nullptr;
-		bool m_Resize = false;
 		float m_Time = 0.0f;
 	};
 }

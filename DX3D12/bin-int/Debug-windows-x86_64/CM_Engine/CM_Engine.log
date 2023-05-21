@@ -1,3 +1,2 @@
-﻿    正在创建库 ..\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.lib 和对象 ..\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.exp
-LINK : warning LNK4098: 默认库“LIBCMT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
-  CM_Engine.vcxproj -> G:\ColaManEngine\DX3D12\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.dll
+﻿  CMd3dApp.cpp
+  CM_Engine.vcxproj -> G:\ColaManEngine\DX3D12\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.lib

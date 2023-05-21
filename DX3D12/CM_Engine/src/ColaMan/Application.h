@@ -13,7 +13,7 @@ namespace ColaMan {
 	{
 	public:
 
-		Application();
+		Application() = delete;
 		Application(HINSTANCE hInstance);
 
 		static Application* Instance;

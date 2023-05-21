@@ -97,16 +97,18 @@
     <ClInclude Include="src\ColaMan\Log.h">
       <Filter>ColaMan</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Platform\Windows\WindowsInput.h">
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>ColaMan\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\ColaMan\Platform\Windows\WindowsWindow.h">
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>ColaMan\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\ColaMan\Window.h">
       <Filter>ColaMan</Filter>
     </ClInclude>
     <ClInclude Include="src\hzpch.h" />
+    <ClInclude Include="src\ColaMan\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Platform\DirectX12\DirectX12Context.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ColaMan\Application.cpp">
@@ -154,12 +156,13 @@
     <ClCompile Include="src\ColaMan\Log.cpp">
       <Filter>ColaMan</Filter>
     </ClCompile>
-    <ClCompile Include="src\ColaMan\Platform\Windows\WindowsInput.cpp">
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>ColaMan\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\ColaMan\Platform\Windows\WindowsWindow.cpp">
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>ColaMan\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\Platform\DirectX12\DirectX12Context.cpp" />
   </ItemGroup>
 </Project>
