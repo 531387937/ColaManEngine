@@ -139,6 +139,9 @@
     <ClInclude Include="src\ColaMan\DirectX12\CMd3dApp.h" />
     <ClInclude Include="src\ColaMan\DirectX12\Camera.h" />
     <ClInclude Include="src\ColaMan\DirectX12\DDSTextureLoader.h" />
+    <ClInclude Include="src\ColaMan\Renderer\PipelineState.h" />
+    <ClInclude Include="src\Platform\DirectX12\DX12Buffer.h" />
+    <ClInclude Include="src\ColaMan\DirectX12\DX12Core.h" />
     <ClInclude Include="src\ColaMan\DirectX12\GameTimer.h" />
     <ClInclude Include="src\ColaMan\DirectX12\GeometryGenerator.h" />
     <ClInclude Include="src\ColaMan\DirectX12\MathHelper.h" />
@@ -156,11 +159,14 @@
     <ClInclude Include="src\ColaMan\Layer.h" />
     <ClInclude Include="src\ColaMan\LayerStack.h" />
     <ClInclude Include="src\ColaMan\Log.h" />
+    <ClInclude Include="src\ColaMan\Renderer\Buffer.h" />
+    <ClInclude Include="src\ColaMan\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\ColaMan\Renderer\Renderer.h" />
+    <ClInclude Include="src\ColaMan\Renderer\Shader.h" />
+    <ClInclude Include="src\ColaMan\Window.h" />
     <ClInclude Include="src\Platform\DirectX12\DirectX12Context.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
-    <ClInclude Include="src\ColaMan\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\ColaMan\Window.h" />
     <ClInclude Include="src\hzpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +174,9 @@
     <ClCompile Include="src\ColaMan\DirectX12\CMd3dApp.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\Camera.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\DDSTextureLoader.cpp" />
+    <ClCompile Include="src\ColaMan\Renderer\PipelineState.cpp" />
+    <ClCompile Include="src\Platform\DirectX12\DX12Buffer.cpp" />
+    <ClCompile Include="src\ColaMan\DirectX12\DX12Core.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\GameTimer.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\GeometryGenerator.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\MathHelper.cpp" />
@@ -179,6 +188,9 @@
     <ClCompile Include="src\ColaMan\Layer.cpp" />
     <ClCompile Include="src\ColaMan\LayerStack.cpp" />
     <ClCompile Include="src\ColaMan\Log.cpp" />
+    <ClCompile Include="src\ColaMan\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\ColaMan\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\ColaMan\Renderer\Shader.cpp" />
     <ClCompile Include="src\Platform\DirectX12\DirectX12Context.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />

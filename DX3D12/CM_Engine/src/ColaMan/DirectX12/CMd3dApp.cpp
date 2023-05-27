@@ -93,7 +93,7 @@ bool CMD3DApp::Initialize()
 
 	if (!InitDirect3D())
 		return false;
-
+	//DX12CommandList = mCommandList.Get();
 	// Do the initial resize code.
 	OnResize();
 

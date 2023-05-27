@@ -18,7 +18,7 @@
 #include "ColaMan/Core.h"
 
 #include "ColaMan/Log.h"
-
+#include <wrl.h>
 #ifdef CM_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif

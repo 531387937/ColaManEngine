@@ -16,11 +16,17 @@
     <Filter Include="ColaMan\ImGui">
       <UniqueIdentifier>{8AFA6B4C-F6BA-E782-BFF5-30002B752C5F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ColaMan\Platform">
-      <UniqueIdentifier>{B4455467-A03E-73B9-C970-583EB5C852C5}</UniqueIdentifier>
+    <Filter Include="ColaMan\Renderer">
+      <UniqueIdentifier>{064D3142-F245-5094-1B78-351907D02FA0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ColaMan\Platform\Windows">
-      <UniqueIdentifier>{EE635673-DA88-A5F3-03D4-8A83EF57A411}</UniqueIdentifier>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\DirectX12">
+      <UniqueIdentifier>{6FE5EAC0-5BC9-AB16-C429-A669B02C9698}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -97,18 +103,28 @@
     <ClInclude Include="src\ColaMan\Log.h">
       <Filter>ColaMan</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
-      <Filter>ColaMan\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
-      <Filter>ColaMan\Platform\Windows</Filter>
+    <ClInclude Include="src\ColaMan\Renderer\GraphicsContext.h">
+      <Filter>ColaMan\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ColaMan\Window.h">
       <Filter>ColaMan</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\DirectX12\DirectX12Context.h">
+      <Filter>Platform\DirectX12</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\hzpch.h" />
-    <ClInclude Include="src\ColaMan\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\Platform\DirectX12\DirectX12Context.h" />
+    <ClInclude Include="src\ColaMan\Renderer\Shader.h" />
+    <ClInclude Include="src\ColaMan\Renderer\Buffer.h" />
+    <ClInclude Include="src\Platform\DirectX12\DX12Buffer.h" />
+    <ClInclude Include="src\ColaMan\DirectX12\DX12Core.h" />
+    <ClInclude Include="src\ColaMan\Renderer\Renderer.h" />
+    <ClInclude Include="src\ColaMan\Renderer\PipelineState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ColaMan\Application.cpp">
@@ -156,13 +172,21 @@
     <ClCompile Include="src\ColaMan\Log.cpp">
       <Filter>ColaMan</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\DirectX12\DirectX12Context.cpp">
+      <Filter>Platform\DirectX12</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
-      <Filter>ColaMan\Platform\Windows</Filter>
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
-      <Filter>ColaMan\Platform\Windows</Filter>
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
-    <ClCompile Include="src\Platform\DirectX12\DirectX12Context.cpp" />
+    <ClCompile Include="src\ColaMan\Renderer\Shader.cpp" />
+    <ClCompile Include="src\ColaMan\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\ColaMan\DirectX12\DX12Core.cpp" />
+    <ClCompile Include="src\Platform\DirectX12\DX12Buffer.cpp" />
+    <ClCompile Include="src\ColaMan\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\ColaMan\Renderer\PipelineState.cpp" />
   </ItemGroup>
 </Project>

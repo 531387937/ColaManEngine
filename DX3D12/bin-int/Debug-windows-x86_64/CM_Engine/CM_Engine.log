@@ -1,2 +1,8 @@
-﻿  CMd3dApp.cpp
+﻿  Application.cpp
+  CMd3dApp.cpp
+  ShapesApp.cpp
+G:\ColaManEngine\DX3D12\CM_Engine\src\ColaMan\DirectX12\ShapesApp.cpp(296,40): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  ImGuiLayer.cpp
+  DirectX12Context.cpp
+  正在生成代码...
   CM_Engine.vcxproj -> G:\ColaManEngine\DX3D12\bin\Debug-windows-x86_64\CM_Engine\CM_Engine.lib
