@@ -24,6 +24,17 @@ namespace ColaMan
 	{
 	}
 
+	void DX12VertexBuffer::SetLayout(const BufferLayout& layout)
+	{
+		m_Layout = layout;
+	}
+
+	const BufferLayout& DX12VertexBuffer::GetLayout() const
+	{
+		return m_Layout;
+		// TODO: 在此处插入 return 语句
+	}
+
 	DX12IndexBuffer::DX12IndexBuffer(uint32_t* indices, uint32_t size) :count(size)
 	{
 		auto app = CMD3DApp::GetApp();

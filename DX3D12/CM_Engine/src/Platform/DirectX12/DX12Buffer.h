@@ -3,6 +3,24 @@
 #include <d3d12.h>
 
 namespace ColaMan {
+
+	static DXGI_FORMAT ShaderDataTypeToDX12Type(ShaderDataType shaderType)
+	{
+		switch (shaderType)
+		{
+		case ColaMan::ShaderDataType::None:			return DXGI_FORMAT::DXGI_FORMAT_UNKNOWN;
+		case ColaMan::ShaderDataType::Float:		return DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT;
+		case ColaMan::ShaderDataType::Float2:		return DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT;
+		case ColaMan::ShaderDataType::Float3:		return DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT;
+		case ColaMan::ShaderDataType::Float4:		return DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT;
+		case ColaMan::ShaderDataType::Int:			return DXGI_FORMAT::DXGI_FORMAT_R32_SINT;
+		case ColaMan::ShaderDataType::Int2:			return DXGI_FORMAT::DXGI_FORMAT_R32G32_SINT;
+		case ColaMan::ShaderDataType::Int3:			return DXGI_FORMAT::DXGI_FORMAT_R32G32B32_SINT;
+		case ColaMan::ShaderDataType::Int4:			return DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_SINT;
+		case ColaMan::ShaderDataType::Bool:			return DXGI_FORMAT::DXGI_FORMAT_R8_UINT;
+		}
+	}
+
 	class DX12VertexBuffer :public VertexBuffer
 	{
 	public:
@@ -11,10 +29,13 @@ namespace ColaMan {
 
 		virtual void Bind()const override;
 		virtual void Unbind()const override;
+		virtual void SetLayout(const BufferLayout& layout)override;
+		virtual const BufferLayout& GetLayout() const override;
 	private:
 		Microsoft::WRL::ComPtr<ID3D12Resource> buffer;
 		Microsoft::WRL::ComPtr<ID3D12Resource> uploaderBuffer;
 		uint32_t count;
+		BufferLayout m_Layout;
 	private:
 		inline D3D12_VERTEX_BUFFER_VIEW VertexBufferView()const
 		{
