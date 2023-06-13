@@ -5,17 +5,20 @@
 namespace ColaMan {
 	DirectX12Context::DirectX12Context(HWND window):m_Window(window)
 	{
-		
+		mDX12Core = new Dx12Core(window);
 	}
+
+	void DirectX12Context::newFrame()
+	{
+		mDX12Core->NewFrame();
+	}
+
 	void DirectX12Context::Init() 
 	{
-		static ShapesApp theApp(m_Window);
-		if (!theApp.Initialize())
-			return;
+		CM_ASSERT(mDX12Core->Initialize(),"DirectX initialized failed!");
 	}
 	void DirectX12Context::SwapBuffers()
 	{
-		static ShapesApp* app = (ShapesApp*)CMD3DApp::GetApp();
-		app->ExcuteCommand();
+		mDX12Core->SwapChain();
 	}
-}
+} 

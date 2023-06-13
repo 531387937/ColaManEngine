@@ -153,6 +153,7 @@ namespace ColaMan {
 	}
 	void WindowsWindow::OnUpdate()
 	{
+		m_Context->newFrame();
 		static MSG msg = { 0 };
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 		{

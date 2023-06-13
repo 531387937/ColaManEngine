@@ -21,8 +21,8 @@ namespace ColaMan {
 
 		
 
-		m_ImGuiLayer = new ImGuiLayer();
-		PushOverlay(m_ImGuiLayer);
+		//m_ImGuiLayer = new ImGuiLayer();
+		//PushOverlay(m_ImGuiLayer);
 	}
 
 	void Application::OnEvent(Event& e)
@@ -51,13 +51,13 @@ namespace ColaMan {
 				{
 					layer->OnUpdate();
 				}
-				m_ImGuiLayer->Begin();
+				//m_ImGuiLayer->Begin();
 				for (Layer* layer : m_LayerStack)
 				{
-					layer->OnImGuiRender();
+					//layer->OnImGuiRender();
 				}
-				theApp->Run();
-				m_ImGuiLayer->End();
+				//theApp->Run();
+				//m_ImGuiLayer->End();
 				m_Window->OnUpdate();
 				
 				

@@ -17,14 +17,12 @@
 class CMD3DApp
 {
 protected:
-
     CMD3DApp(HWND window);
     CMD3DApp(const CMD3DApp& rhs) = delete;
     CMD3DApp& operator=(const CMD3DApp& rhs) = delete;
     virtual ~CMD3DApp();
 
 public:
-
     static CMD3DApp* GetApp();
     void Resize(float width, float height);
     virtual ID3D12Device* GetDevice() = 0;
@@ -34,9 +32,9 @@ public:
     GameTimer& DX12GetTime() { return mTimer; }
 
 
-    float     AspectRatio()const;
+    float AspectRatio() const;
 
-    bool Get4xMsaaState()const;
+    bool Get4xMsaaState() const;
     void Set4xMsaaState(bool value);
 
     int Run();
@@ -44,7 +42,7 @@ public:
     virtual bool Initialize();
     virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
     virtual void ExcuteCommand() = 0;
-   
+
     virtual ID3D12DescriptorHeap* GetImGuiDescHeap() = 0;
 
 protected:
@@ -54,21 +52,28 @@ protected:
     virtual void Draw(const GameTimer& gt) = 0;
 
     // Convenience overrides for handling mouse input.
-    virtual void OnMouseDown(WPARAM btnState, int x, int y) { }
-    virtual void OnMouseUp(WPARAM btnState, int x, int y) { }
-    virtual void OnMouseMove(WPARAM btnState, int x, int y) { }
+    virtual void OnMouseDown(WPARAM btnState, int x, int y)
+    {
+    }
+
+    virtual void OnMouseUp(WPARAM btnState, int x, int y)
+    {
+    }
+
+    virtual void OnMouseMove(WPARAM btnState, int x, int y)
+    {
+    }
 
 protected:
-
     bool InitDirect3D();
     void CreateCommandObjects();
     void CreateSwapChain();
 
     void FlushCommandQueue();
 
-    ID3D12Resource* CurrentBackBuffer()const;
-    D3D12_CPU_DESCRIPTOR_HANDLE CurrentBackBufferView()const;
-    D3D12_CPU_DESCRIPTOR_HANDLE DepthStencilView()const;
+    ID3D12Resource* CurrentBackBuffer() const;
+    D3D12_CPU_DESCRIPTOR_HANDLE CurrentBackBufferView() const;
+    D3D12_CPU_DESCRIPTOR_HANDLE DepthStencilView() const;
 
     void CalculateFrameStats();
 
@@ -77,19 +82,18 @@ protected:
     void LogOutputDisplayModes(IDXGIOutput* output, DXGI_FORMAT format);
 
 protected:
-
     static CMD3DApp* mApp;
 
-    HWND      mhMainWnd = nullptr; // main window handle
-    bool      mAppPaused = false;  // is the application paused?
-    bool      mMinimized = false;  // is the application minimized?
-    bool      mMaximized = false;  // is the application maximized?
-    bool      mResizing = false;   // are the resize bars being dragged?
-    bool      mFullscreenState = false;// fullscreen enabled
+    HWND mhMainWnd = nullptr; // main window handle
+    bool mAppPaused = false; // is the application paused?
+    bool mMinimized = false; // is the application minimized?
+    bool mMaximized = false; // is the application maximized?
+    bool mResizing = false; // are the resize bars being dragged?
+    bool mFullscreenState = false; // fullscreen enabled
 
     // Set true to use 4X MSAA (?.1.8).  The default is false.
-    bool      m4xMsaaState = false;    // 4X MSAA enabled
-    UINT      m4xMsaaQuality = 0;      // quality level of 4X MSAA
+    bool m4xMsaaState = false; // 4X MSAA enabled
+    UINT m4xMsaaQuality = 0; // quality level of 4X MSAA
 
     // Used to keep track of the ?delta-time?and game time (?.4).
     GameTimer mTimer;
@@ -104,7 +108,7 @@ protected:
 
     Microsoft::WRL::ComPtr<ID3D12CommandQueue> mCommandQueue;
     Microsoft::WRL::ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;
-    
+
 
     static const int SwapChainBufferCount = 2;
     int mCurrBackBuffer = 0;

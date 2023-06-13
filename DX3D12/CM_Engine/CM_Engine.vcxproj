@@ -139,7 +139,10 @@
     <ClInclude Include="src\ColaMan\DirectX12\CMd3dApp.h" />
     <ClInclude Include="src\ColaMan\DirectX12\Camera.h" />
     <ClInclude Include="src\ColaMan\DirectX12\DDSTextureLoader.h" />
+    <ClInclude Include="src\ColaMan\Renderer\CMCmdList.h" />
     <ClInclude Include="src\ColaMan\Renderer\PipelineState.h" />
+    <ClInclude Include="src\ColaMan\Renderer\ResourceState.h" />
+    <ClInclude Include="src\ColaMan\Renderer\ViewPort.h" />
     <ClInclude Include="src\Platform\DirectX12\DX12Buffer.h" />
     <ClInclude Include="src\ColaMan\DirectX12\DX12Core.h" />
     <ClInclude Include="src\ColaMan\DirectX12\GameTimer.h" />
@@ -175,6 +178,7 @@
     <ClCompile Include="src\ColaMan\DirectX12\Camera.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\DDSTextureLoader.cpp" />
     <ClCompile Include="src\ColaMan\Renderer\PipelineState.cpp" />
+    <ClCompile Include="src\ColaMan\Renderer\ViewPort.cpp" />
     <ClCompile Include="src\Platform\DirectX12\DX12Buffer.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\DX12Core.cpp" />
     <ClCompile Include="src\ColaMan\DirectX12\GameTimer.cpp" />
