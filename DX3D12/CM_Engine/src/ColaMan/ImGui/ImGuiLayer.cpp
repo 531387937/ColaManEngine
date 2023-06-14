@@ -4,6 +4,8 @@
 #include "examples/imgui_impl_win32.h"
 #include "ColaMan/DirectX12/ShapesApp.h"
 #include "ColaMan/Application.h"
+#include "Platform/DirectX12/DirectX12Context.h"
+
 namespace ColaMan {
 
 	//static Microsoft::WRL::ComPtr <ID3D12DescriptorHeap> mSrvDescHeap = nullptr;
@@ -68,13 +70,13 @@ namespace ColaMan {
 		io.DisplaySize = ImVec2((float)app->GetWindow().GetWidth(), (float)app->GetWindow().GetHeight());
 		ImGui::Render();
 
-		CMD3DApp::GetApp()->GetCommandList()->SetDescriptorHeaps(1, mSrvDescHeap.GetAddressOf());
+		DirectX12Context::GetInstance()->GetCmdList()->SetDescriptorHeaps(1, mSrvDescHeap.GetAddressOf());
 		
-		ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(),CMD3DApp::GetApp()->GetCommandList());
+		ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(),DirectX12Context::GetInstance()->GetCmdList());
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
 			ImGui::UpdatePlatformWindows();
-			ImGui::RenderPlatformWindowsDefault(NULL, (void*)CMD3DApp::GetApp()->GetCommandList());
+			ImGui::RenderPlatformWindowsDefault(NULL, (void*)DirectX12Context::GetInstance()->GetCmdList());
 		}
 	}
 
@@ -128,7 +130,7 @@ namespace ColaMan {
 		SrvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 		SrvHeapDesc.NodeMask = 0;
 		SrvHeapDesc.NumDescriptors = 1;
-		auto device = (CMD3DApp::GetApp())->GetDevice();
+		auto device = DirectX12Context::GetInstance()->GetDevice();
 		ThrowIfFailed(device->CreateDescriptorHeap(&SrvHeapDesc, IID_PPV_ARGS(mSrvDescHeap.GetAddressOf())));
 
 
@@ -209,7 +211,7 @@ namespace ColaMan {
 		ImGuiIO& io = ImGui::GetIO();
 		io.DisplaySize = ImVec2((float)e.GetWidth(), (float)e.GetHeight());
 		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
-		CMD3DApp::GetApp()->Resize(io.DisplaySize.x, io.DisplaySize.y);
+		DirectX12Context::GetInstance()->Resize(io.DisplaySize.x, io.DisplaySize.y);
 		return false;
 	}
 

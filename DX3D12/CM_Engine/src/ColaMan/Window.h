@@ -26,6 +26,7 @@ namespace ColaMan {
 
 		virtual ~Window() = default;
 
+		virtual void NewFrame() = 0;
 		virtual void OnUpdate() = 0;
 
 		virtual unsigned int GetWidth() const = 0;

@@ -19,6 +19,7 @@ namespace ColaMan {
 		WindowsWindow(const WindowProps& props, HINSTANCE hInstance);
 		virtual ~WindowsWindow();
 
+		void NewFrame() override;
 		void OnUpdate() override;
 		inline unsigned int GetWidth() const override { return m_Data.Width; }
 		inline unsigned int GetHeight() const override { return m_Data.Height; }

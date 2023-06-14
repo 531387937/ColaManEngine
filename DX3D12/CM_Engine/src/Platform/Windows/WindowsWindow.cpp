@@ -151,9 +151,14 @@ namespace ColaMan {
 	WindowsWindow::~WindowsWindow() {
 		Shutdown();
 	}
-	void WindowsWindow::OnUpdate()
+
+	void WindowsWindow::NewFrame()
 	{
 		m_Context->newFrame();
+	}
+
+	void WindowsWindow::OnUpdate()
+	{
 		static MSG msg = { 0 };
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 		{
