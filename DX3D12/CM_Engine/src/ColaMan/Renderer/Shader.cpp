@@ -31,6 +31,14 @@ namespace ColaMan {
 		byteCode = nullptr;
 	}
 
+	void Shader::Bind() const
+	{
+	}
+
+	void Shader::UnBind() const
+	{
+	}
+
 	D3D12_SHADER_BYTECODE Shader::Bound()
 	{
 		return { reinterpret_cast<BYTE*>(byteCode->GetBufferPointer()),
