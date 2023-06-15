@@ -56,7 +56,7 @@ namespace ColaMan {
 		mCommandList->ResourceBarrier(
 			1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(), D3D12_RESOURCE_STATE_PRESENT,
 				D3D12_RESOURCE_STATE_RENDER_TARGET));
-		mCommandList->ClearRenderTargetView(CurrentBackBufferView(), DirectX::Colors::SteelBlue, 0, nullptr);
+		mCommandList->ClearRenderTargetView(CurrentBackBufferView(), DirectX::Colors::DarkGray, 0, nullptr);
 		mCommandList->ClearDepthStencilView(DepthStencilView(), D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0,
 			0, nullptr);
 
@@ -84,7 +84,7 @@ namespace ColaMan {
 		// Try to create hardware device.
 		HRESULT hardwareResult = D3D12CreateDevice(
 			nullptr,             // default adapter
-			D3D_FEATURE_LEVEL_12_1,
+			D3D_FEATURE_LEVEL_11_0,
 			IID_PPV_ARGS(&md3dDevice));
 
 		// Fallback to WARP device.

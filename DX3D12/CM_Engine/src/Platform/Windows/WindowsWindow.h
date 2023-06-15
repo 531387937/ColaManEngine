@@ -38,5 +38,6 @@ namespace ColaMan {
 		HINSTANCE mhAppInst = nullptr;
 		WindowData m_Data;
 		GraphicsContext* m_Context;
+		
 	};
 }

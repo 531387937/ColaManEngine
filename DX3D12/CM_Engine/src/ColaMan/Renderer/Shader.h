@@ -15,11 +15,9 @@ namespace ColaMan{
 
 		void Bind() const;
 		void UnBind() const;
+		D3D12_SHADER_BYTECODE Bound();
 	private:
 		ComPtr<ID3DBlob> byteCode = nullptr;
-	D3D12_SHADER_BYTECODE operator= (const Shader& other) {
-		return { reinterpret_cast<BYTE*>(other.byteCode->GetBufferPointer()),
-		other.byteCode->GetBufferSize() };
-	}
+	
 	};
 }

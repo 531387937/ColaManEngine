@@ -30,4 +30,10 @@ namespace ColaMan {
 	{
 		byteCode = nullptr;
 	}
+
+	D3D12_SHADER_BYTECODE Shader::Bound()
+	{
+		return { reinterpret_cast<BYTE*>(byteCode->GetBufferPointer()),
+			byteCode->GetBufferSize() };
+	}
 }
