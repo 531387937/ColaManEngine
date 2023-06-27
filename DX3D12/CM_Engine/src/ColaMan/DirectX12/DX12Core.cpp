@@ -1,6 +1,8 @@
 #include "hzpch.h"
 #include "DX12Core.h"
 using namespace Microsoft::WRL;
+
+int const gNumFrameResources = 3;
 namespace ColaMan {
 	Dx12Core* Dx12Core::dx12 = nullptr;
 	Dx12Core::Dx12Core(HWND window):mhMainWnd(window)
@@ -14,8 +16,8 @@ namespace ColaMan {
 	}
 	Dx12Core::~Dx12Core()
 	{
-		if(md3dDevice!=nullptr)
-			;
+		if (md3dDevice != nullptr)
+			FlushCommandQueue();
 	}
 	bool Dx12Core::Initialize()
 	{
@@ -216,6 +218,41 @@ namespace ColaMan {
 		mCurrFrameResource->Fence = ++mCurrentFence;
 
 		mCommandQueue->Signal(mFence.Get(), mCurrentFence);
+	}
+
+	ID3D12Device* Dx12Core::GetDevice()
+	{
+		return dx12->md3dDevice.Get();
+	}
+
+	ID3D12GraphicsCommandList* Dx12Core::GetCommandList()
+	{
+		return dx12->mCommandList.Get();
+	}
+
+	ID3D12CommandAllocator* Dx12Core::GetCommandAlloc()
+	{
+		return dx12->mDirectCmdListAlloc.Get();
+	}
+
+	ID3D12CommandQueue* Dx12Core::GetCommandQueue()
+	{
+		return dx12->mCommandQueue.Get();
+	}
+
+	void Dx12Core::BeginCreateResource()
+	{
+		GetCommandAlloc()->Reset();
+		GetCommandList()->Reset(GetCommandAlloc(), nullptr);
+	}
+
+	void Dx12Core::EndCreateResource()
+	{
+		GetCommandList()->Close();
+		ID3D12CommandList* cmdsList[] = { GetCommandList() };
+
+		GetCommandQueue()->ExecuteCommandLists(_countof(cmdsList), cmdsList);
+		dx12->FlushCommandQueue();
 	}
 
 	ID3D12Resource* Dx12Core::CurrentBackBuffer() const

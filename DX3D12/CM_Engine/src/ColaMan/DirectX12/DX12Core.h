@@ -8,6 +8,10 @@
 #include "d3dUtil.h"
 #include "UploadBuffer.h"
 
+#pragma comment(lib,"d3dcompiler.lib")
+#pragma comment(lib, "D3D12.lib")
+#pragma comment(lib, "dxgi.lib")
+
 
 namespace ColaMan
 {
@@ -47,6 +51,12 @@ namespace ColaMan
         bool Initialize();
         void NewFrame();
         void SwapChain();
+        static ID3D12Device* GetDevice();
+        static ID3D12GraphicsCommandList* GetCommandList();
+        static ID3D12CommandAllocator* GetCommandAlloc();
+        static ID3D12CommandQueue* GetCommandQueue();
+        static void BeginCreateResource();
+        static void EndCreateResource();
 
         float AspectRatio() const;
     private:

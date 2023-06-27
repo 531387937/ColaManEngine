@@ -3,7 +3,7 @@
 #include "Platform/DirectX12/DX12Buffer.h"
 #include "Renderer.h"
 namespace ColaMan {
-	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
+	VertexBuffer* VertexBuffer::Create(void* vertices, uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -17,7 +17,7 @@ namespace ColaMan {
 		}
 	}
 
-	IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t size)
+	IndexBuffer* IndexBuffer::Create(uint16_t* indices, uint16_t size)
 	{
 		switch (Renderer::GetAPI())
 		{

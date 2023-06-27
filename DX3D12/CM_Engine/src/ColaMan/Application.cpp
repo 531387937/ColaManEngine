@@ -1,7 +1,7 @@
 #include "hzpch.h"
 #include "Application.h"
-#include "DirectX12/ShapesApp.h"
 #include "Platform/DirectX12/DirectX12Context.h"
+
 #include "Platform/Windows/WindowsInput.h"
 
 namespace ColaMan
@@ -23,8 +23,7 @@ namespace ColaMan
 
         m_ImGuiLayer = new ImGuiLayer();
         PushOverlay(m_ImGuiLayer);
-
-        DirectX12Context::GetInstance()->newFrame();
+        Dx12Core::BeginCreateResource();
         vertices = {
             {-0.5f, -0.5f, 0.0f},
             {0.5f, -0.5f, 0.0f},
@@ -34,21 +33,9 @@ namespace ColaMan
         {
             0, 2, 1
         };
-        VertexBufferGPU = d3dUtil::CreateDefaultBuffer(DirectX12Context::GetInstance()->GetDevice(),
-                                                       DirectX12Context::GetInstance()->GetCmdList(), vertices.data(),
-                                                       sizeof(XMFLOAT3) * vertices.size(), VertexBufferUploader);
-        vbo.BufferLocation = VertexBufferGPU->GetGPUVirtualAddress();
-        vbo.SizeInBytes = sizeof(XMFLOAT3) * vertices.size();
-        vbo.StrideInBytes = sizeof(XMFLOAT3);
-
-       
-        IndexBufferGPU = d3dUtil::CreateDefaultBuffer(DirectX12Context::GetInstance()->GetDevice(),
-                                                      DirectX12Context::GetInstance()->GetCmdList(), indices.data(),
-                                                      sizeof(uint16_t) * indices.size(), IndexBufferUploader);
-
-        ibo.Format = DXGI_FORMAT_R16_UINT;
-        ibo.BufferLocation = IndexBufferGPU->GetGPUVirtualAddress();
-        ibo.SizeInBytes = sizeof(uint16_t) * indices.size();
+        vb.reset(VertexBuffer::Create(vertices.data(), sizeof(DirectX::XMFLOAT3) * vertices.size()));
+        ib.reset(IndexBuffer::Create(indices.data(), indices.size()));
+        
 
         VsShader = new Shader(L"Shaders\\color.hlsl", nullptr, "VS", "vs_5_0");
         PsShader = new Shader(L"Shaders\\color.hlsl", nullptr, "PS", "ps_5_0");
@@ -102,7 +89,7 @@ namespace ColaMan
 
         ThrowIfFailed(DirectX12Context::GetInstance()->GetDevice()->CreateGraphicsPipelineState(&opaquePsoDesc, IID_PPV_ARGS(&mPSO)));
 
-        DirectX12Context::GetInstance()->SwapBuffers();
+        Dx12Core::EndCreateResource();
     }
 
     void Application::OnEvent(Event& e)
@@ -129,10 +116,12 @@ namespace ColaMan
                 DirectX12Context::GetInstance()->GetCmdList()->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
                 DirectX12Context::GetInstance()->GetCmdList()->SetGraphicsRootSignature(mRootSignature.Get());
                 DirectX12Context::GetInstance()->GetCmdList()->SetPipelineState(mPSO.Get());
-                DirectX12Context::GetInstance()->GetCmdList()->IASetIndexBuffer(&ibo);
+
+                ib->Bind();
                 DirectX12Context::GetInstance()->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                DirectX12Context::GetInstance()->GetCmdList()->IASetVertexBuffers(0, 1, &vbo);
-                DirectX12Context::GetInstance()->GetCmdList()->DrawIndexedInstanced(3, 1, 0, 0, 0);
+                vb->Bind();
+
+                DirectX12Context::GetInstance()->GetCmdList()->DrawIndexedInstanced(ib->GetCount(), 1, 0, 0, 0);
                 
                 for (Layer* layer : m_LayerStack)
                 {

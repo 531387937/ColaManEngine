@@ -1,14 +1,13 @@
 #include "hzpch.h"
 #include "DX12Buffer.h"
-#include "ColaMan/DirectX12/d3dUtil.h"
-#include "ColaMan/DirectX12/CMd3dApp.h"
+#include "ColaMan/DirectX12/d3dUtil.h" 
+#include "ColaMan/DirectX12/DX12Core.h"
 
 namespace ColaMan
 {
-	DX12VertexBuffer::DX12VertexBuffer(float* vertices, uint32_t size):count(size)
+	DX12VertexBuffer::DX12VertexBuffer(void* vertices, uint32_t size):count(size)
 	{
-		auto app = CMD3DApp::GetApp();
-		buffer = d3dUtil::CreateDefaultBuffer(app->GetDevice(), app->GetCommandList(), vertices, size, uploaderBuffer);
+		buffer = d3dUtil::CreateDefaultBuffer(Dx12Core::GetDevice(), Dx12Core::GetCommandList(), vertices, size, uploaderBuffer);
 	}
 	DX12VertexBuffer::~DX12VertexBuffer()
 	{
@@ -16,8 +15,7 @@ namespace ColaMan
 	}
 	void DX12VertexBuffer::Bind() const
 	{
-		auto app = CMD3DApp::GetApp();
-		app->GetCommandList()->IASetVertexBuffers(0, 1, &VertexBufferView());
+		Dx12Core::GetCommandList()->IASetVertexBuffers(0, 1, &VertexBufferView());
 	}
 
 	void DX12VertexBuffer::Unbind() const
@@ -35,10 +33,12 @@ namespace ColaMan
 		// TODO: 在此处插入 return 语句
 	}
 
-	DX12IndexBuffer::DX12IndexBuffer(uint32_t* indices, uint32_t size) :count(size)
+	///////////////////////IndexBuffer/////////////////////////////////
+
+
+	DX12IndexBuffer::DX12IndexBuffer(uint16_t* indices, uint16_t size) :count(size)
 	{
-		auto app = CMD3DApp::GetApp();
-		buffer = d3dUtil::CreateDefaultBuffer(app->GetDevice(), app->GetCommandList(), indices, size, uploaderBuffer);
+		buffer = d3dUtil::CreateDefaultBuffer(Dx12Core::GetDevice(), Dx12Core::GetCommandList(), indices, size*sizeof(uint16_t), uploaderBuffer);
 	}
 	DX12IndexBuffer::~DX12IndexBuffer()
 	{
@@ -46,14 +46,13 @@ namespace ColaMan
 	}
 	void DX12IndexBuffer::Bind() const
 	{
-		auto app = CMD3DApp::GetApp();
-		app->GetCommandList()->IASetIndexBuffer(&IndexBufferView());
+		Dx12Core::GetCommandList()->IASetIndexBuffer(&IndexBufferView());
 	}
 
 	void DX12IndexBuffer::Unbind() const
 	{
 	}
-	uint32_t DX12IndexBuffer::GetCount() const
+	uint16_t DX12IndexBuffer::GetCount() const
 	{
 		return count;
 	}

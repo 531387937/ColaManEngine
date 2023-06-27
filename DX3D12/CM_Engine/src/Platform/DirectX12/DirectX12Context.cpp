@@ -1,6 +1,5 @@
 #include "hzpch.h"
 #include "DirectX12Context.h"
-#include <ColaMan/DirectX12/ShapesApp.h>
 
 namespace ColaMan {
 	DirectX12Context* DirectX12Context::instance = nullptr;

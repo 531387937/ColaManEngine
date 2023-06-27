@@ -2,7 +2,6 @@
 #include "ImGuiLayer.h"
 #include "examples/imgui_impl_dx12.h"
 #include "examples/imgui_impl_win32.h"
-#include "ColaMan/DirectX12/ShapesApp.h"
 #include "ColaMan/Application.h"
 #include "Platform/DirectX12/DirectX12Context.h"
 
