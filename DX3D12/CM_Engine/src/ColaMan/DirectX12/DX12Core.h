@@ -51,12 +51,20 @@ namespace ColaMan
         bool Initialize();
         void NewFrame();
         void SwapChain();
+        inline void dxClearColor(DirectX::XMFLOAT4 color) { 
+            mClearColor.f[0] = color.x;
+            mClearColor.f[1] = color.y;
+            mClearColor.f[2] = color.z;
+            mClearColor.f[3] = color.w;
+         }
+        void Clear();
         static ID3D12Device* GetDevice();
         static ID3D12GraphicsCommandList* GetCommandList();
         static ID3D12CommandAllocator* GetCommandAlloc();
         static ID3D12CommandQueue* GetCommandQueue();
         static void BeginCreateResource();
         static void EndCreateResource();
+        
 
         float AspectRatio() const;
     private:
@@ -126,5 +134,7 @@ namespace ColaMan
         std::vector<std::unique_ptr<FrameResource>> mFrameResources;
         FrameResource* mCurrFrameResource = nullptr;
         int mCurrFrameResourceIndex = 0;
+
+        DirectX::XMVECTORF32 mClearColor;
     };
 }

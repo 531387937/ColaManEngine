@@ -37,17 +37,38 @@ namespace ColaMan {
 		uint32_t Size;
 		uint32_t Offset;
 		uint32_t Slot;
-
+		bool Normalized;
 		BufferElement() = default;
 
-		BufferElement(const std::string& name, ShaderDataType type) :Name(name),Index(0), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Slot(0)
+		BufferElement(const std::string& name, ShaderDataType type, bool normalized = false) :Name(name),Index(0), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Slot(0),Normalized(normalized)
 		{
 
 		}
 
-		BufferElement(const std::string& name,uint32_t index, ShaderDataType type) :Name(name),Index(index), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Slot(0)
+		BufferElement(const std::string& name,uint32_t index, ShaderDataType type, bool normalized = false) :Name(name),Index(index), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Slot(0), Normalized(normalized)
 		{
 			
+		}
+
+		uint32_t GetComponentCount() const
+		{
+			switch (Type)
+			{
+			case ShaderDataType::Float:   return 1;
+			case ShaderDataType::Float2:  return 2;
+			case ShaderDataType::Float3:  return 3;
+			case ShaderDataType::Float4:  return 4;
+			case ShaderDataType::Mat3:    return 3 * 3;
+			case ShaderDataType::Mat4:    return 4 * 4;
+			case ShaderDataType::Int:     return 1;
+			case ShaderDataType::Int2:    return 2;
+			case ShaderDataType::Int3:    return 3;
+			case ShaderDataType::Int4:    return 4;
+			case ShaderDataType::Bool:    return 1;
+			}
+
+			CM_CORE_ASSERT(false, "Unknown ShaderDataType!");
+			return 0;
 		}
 	};
 
@@ -56,7 +77,7 @@ namespace ColaMan {
 	public:
 		BufferLayout() = default;
 		~BufferLayout() = default;
-		BufferLayout(std::initializer_list<BufferElement>& element):m_Elements(element)
+		BufferLayout(const std::initializer_list<BufferElement>& element):m_Elements(element)
 		{
 			CalculateOffsetsAndStride();
 		}

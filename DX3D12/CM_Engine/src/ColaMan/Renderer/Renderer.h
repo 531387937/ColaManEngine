@@ -1,15 +1,14 @@
 #pragma once
+#include "RenderCommand.h"
 
 namespace ColaMan {
-	enum class RendererAPI
-	{
-		None = 0,DX12 = 1
-	};
-
+	
 	class Renderer {
 	public:
-		inline static RendererAPI GetAPI() { return s_RendererAPI; }
-	private:
-		static RendererAPI s_RendererAPI;
+		static void BeginFrame();
+		static void EndFrame();
+
+		static void Submit(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer);
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	};
 }

@@ -41,7 +41,7 @@ namespace ColaMan {
 		{
 			D3D12_VERTEX_BUFFER_VIEW vbv;
 			vbv.BufferLocation = buffer->GetGPUVirtualAddress();
-			vbv.StrideInBytes = sizeof(float)*3;
+			vbv.StrideInBytes = m_Layout.GetStride();;
 			vbv.SizeInBytes = count;
 
 			return vbv;

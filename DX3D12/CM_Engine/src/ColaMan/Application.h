@@ -45,9 +45,9 @@ namespace ColaMan {
 		ComPtr<ID3D12RootSignature> mRootSignature = nullptr;
 		ComPtr<ID3D12DescriptorHeap> descriptorHeap = nullptr;
 
-		std::unique_ptr<VertexBuffer> vb;
-		std::unique_ptr<IndexBuffer> ib;
-		std::vector<DirectX::XMFLOAT3> vertices;
+		std::shared_ptr<VertexBuffer> vb;
+		std::shared_ptr<IndexBuffer> ib;
+		std::vector<float> vertices;
 		std::vector<uint16_t> indices;
 	};
 

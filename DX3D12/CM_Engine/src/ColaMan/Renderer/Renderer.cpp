@@ -1,6 +1,17 @@
 #include "hzpch.h"
 #include "Renderer.h"
 
+
 namespace ColaMan {
-	RendererAPI Renderer::s_RendererAPI = RendererAPI::DX12;
+	void Renderer::BeginFrame()
+	{
+
+	}
+	void Renderer::EndFrame()
+	{
+	}
+	void Renderer::Submit(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer)
+	{
+		RenderCommand::DrawIndexed(vertexBuffer, indexBuffer);
+	}
 }

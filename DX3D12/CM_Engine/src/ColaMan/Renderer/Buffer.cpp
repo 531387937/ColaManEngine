@@ -7,10 +7,10 @@ namespace ColaMan {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			CM_CORE_ASSERT(false, "RendererAPI::None is not supported!");
 			return nullptr;
-		case RendererAPI::DX12:
+		case RendererAPI::API::DX12:
 			return new DX12VertexBuffer(vertices, size);
 		default:
 			return nullptr;
@@ -21,10 +21,10 @@ namespace ColaMan {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			CM_CORE_ASSERT(false, "RendererAPI::None is not supported!");
 			return nullptr;
-		case RendererAPI::DX12:
+		case RendererAPI::API::DX12:
 			return new DX12IndexBuffer(indices, size);
 		default:
 			return nullptr;
