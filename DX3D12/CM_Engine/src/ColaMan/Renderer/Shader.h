@@ -8,6 +8,7 @@ namespace ColaMan{
 	class Shader
 	{
 	public:
+		Shader() = default;
 		Shader(const std::wstring& filename, const D3D_SHADER_MACRO* defines,
 			const std::string& entrypoint,
 			const std::string& target);

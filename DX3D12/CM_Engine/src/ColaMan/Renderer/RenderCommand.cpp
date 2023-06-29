@@ -13,4 +13,8 @@ namespace ColaMan
 	{
 		s_RendererAPI->Clear();
 	}
+	void RenderCommand::SetPipelineState(const std::shared_ptr<PipelineState>& pipelineState)
+	{
+		s_RendererAPI->SetPipelineState(pipelineState);
+	}
 }

@@ -59,7 +59,7 @@ namespace ColaMan
 		VsShader = new Shader(L"Shaders\\color.hlsl", nullptr, "VS", "vs_5_0");
 		PsShader = new Shader(L"Shaders\\color.hlsl", nullptr, "PS", "ps_5_0");
 
-		BufferLayout layout = {
+		InputLayout layout = {
 			{"POSITION",ShaderDataType::Float3},
 			{"COLOR",ShaderDataType::Float4},
 		};
@@ -69,11 +69,6 @@ namespace ColaMan
 			mInputLayout.push_back( { iter->Name.c_str(), iter->Index, format2DXFormat(iter->Type), iter->Slot, iter->Offset, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0});
 			
 		}
-		/*mInputLayout =
-		{
-			{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
-		};*/
-
 
 		D3D12_DESCRIPTOR_HEAP_DESC descriptorHeapDesc = {};
 		descriptorHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;  // 描述符堆类型为常量缓冲区/着色器资源视图/非结构化资源视图
@@ -147,8 +142,7 @@ namespace ColaMan
 				
 				Renderer::BeginFrame();
 				RenderCommand::Clear();
-				Renderer::Submit(vb,ib);
-				Renderer::EndFrame();
+				
 
 				//Renderer::Flush();
 				ID3D12DescriptorHeap* descriptorHeaps[] = { descriptorHeap.Get() };
@@ -156,11 +150,13 @@ namespace ColaMan
 				DirectX12Context::GetInstance()->GetCmdList()->SetGraphicsRootSignature(mRootSignature.Get());
 				DirectX12Context::GetInstance()->GetCmdList()->SetPipelineState(mPSO.Get());
 
-				ib->Bind();
-				DirectX12Context::GetInstance()->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-				vb->Bind();
+				//ib->Bind();
+				//DirectX12Context::GetInstance()->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+				Renderer::Submit(vb, ib);
+				Renderer::EndFrame();
+				//vb->Bind();
 
-				DirectX12Context::GetInstance()->GetCmdList()->DrawIndexedInstanced(ib->GetCount(), 1, 0, 0, 0);
+				//DirectX12Context::GetInstance()->GetCmdList()->DrawIndexedInstanced(ib->GetCount(), 1, 0, 0, 0);
 
 				for (Layer* layer : m_LayerStack)
 				{
