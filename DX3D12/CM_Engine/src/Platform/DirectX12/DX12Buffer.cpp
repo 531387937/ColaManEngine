@@ -22,12 +22,12 @@ namespace ColaMan
 	{
 	}
 
-	void DX12VertexBuffer::SetLayout(const BufferLayout& layout)
+	void DX12VertexBuffer::SetLayout(const InputLayout& layout)
 	{
 		m_Layout = layout;
 	}
 
-	const BufferLayout& DX12VertexBuffer::GetLayout() const
+	const InputLayout& DX12VertexBuffer::GetLayout() const
 	{
 		return m_Layout;
 		// TODO: 在此处插入 return 语句

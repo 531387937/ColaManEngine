@@ -29,13 +29,13 @@ namespace ColaMan {
 
 		virtual void Bind()const override;
 		virtual void Unbind()const override;
-		virtual void SetLayout(const BufferLayout& layout)override;
-		virtual const BufferLayout& GetLayout() const override;
+		virtual void SetLayout(const InputLayout& layout)override;
+		virtual const InputLayout& GetLayout() const override;
 	private:
 		Microsoft::WRL::ComPtr<ID3D12Resource> buffer;
 		Microsoft::WRL::ComPtr<ID3D12Resource> uploaderBuffer;
 		uint32_t count;
-		BufferLayout m_Layout;
+		InputLayout m_Layout;
 	private:
 		inline D3D12_VERTEX_BUFFER_VIEW VertexBufferView()const
 		{
