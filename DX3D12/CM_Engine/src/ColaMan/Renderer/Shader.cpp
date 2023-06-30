@@ -4,7 +4,7 @@
 
 
 namespace ColaMan {
-	Shader::Shader(const std::wstring& filename,const D3D_SHADER_MACRO* defines,
+	Shader::Shader(const std::wstring& filename, const D3D_SHADER_MACRO* defines,
 		const std::string& entrypoint,
 		const std::string& target)
 	{
@@ -41,7 +41,11 @@ namespace ColaMan {
 
 	D3D12_SHADER_BYTECODE Shader::Bound()
 	{
-		return { reinterpret_cast<BYTE*>(byteCode->GetBufferPointer()),
-			byteCode->GetBufferSize() };
+		if (byteCode)
+		{
+			return { reinterpret_cast<BYTE*>(byteCode->GetBufferPointer()),
+						byteCode->GetBufferSize() };
+		}
+		return {nullptr,0};
 	}
 }

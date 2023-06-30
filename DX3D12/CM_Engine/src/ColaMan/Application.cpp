@@ -14,25 +14,6 @@ namespace ColaMan
 	Application::~Application()
 	{
 	}
-	static DXGI_FORMAT format2DXFormat(ShaderDataType type)
-	{
-		switch (type)
-		{
-
-			case ShaderDataType::Float:   return DXGI_FORMAT_R32_FLOAT;
-			case ShaderDataType::Float2:  return DXGI_FORMAT_R32G32_FLOAT;
-			case ShaderDataType::Float3:  return DXGI_FORMAT_R32G32B32_FLOAT;
-			case ShaderDataType::Float4:  return DXGI_FORMAT_R32G32B32A32_FLOAT;
-			//case ShaderDataType::Mat3:    return DXGI_FORMAT_;
-			//case ShaderDataType::Mat4:    return 4 * 4;
-			case ShaderDataType::Int:     return DXGI_FORMAT_R8_SINT;
-			case ShaderDataType::Int2:    return DXGI_FORMAT_R8G8_SINT;
-			//case ShaderDataType::Int3:    return DXGI_FORMAT_R8G8B8_SINT;
-			case ShaderDataType::Int4:    return DXGI_FORMAT_R8G8B8A8_SINT;
-			case ShaderDataType::Bool:    return DXGI_FORMAT_R1_UNORM;
-			
-		}
-	}
 	Application::Application(HINSTANCE hInstance)
 	{
 		if (!Instance)
@@ -108,7 +89,7 @@ namespace ColaMan
 		opaquePsoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 		opaquePsoDesc.NumRenderTargets = 1;
 		opaquePsoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
-		opaquePsoDesc.SampleDesc.Count = 4;
+		opaquePsoDesc.SampleDesc.Count = 1;
 		opaquePsoDesc.SampleDesc.Quality = 0;
 		opaquePsoDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 

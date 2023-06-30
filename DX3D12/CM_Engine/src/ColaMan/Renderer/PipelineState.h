@@ -1,134 +1,29 @@
 #pragma once
 #include "Shader.h"
-#include <ColaMan/Renderer/Buffer.h>
 #include "ColaMan/Renderer/RootSignature.h"
+#include "ColaMan/Core/RenderCode.h"
+#include "Platform/DirectX12/CM2DX12.h"
+#include "Platform/DirectX12/DirectX12_Map.h"
 namespace ColaMan
 {
-    //////////////////enum///////////////////////////////
-
-    enum class FillMode
-    {
-        WIREFRAME = 1, SOLID = 2
-    };
-
-    enum class CullMode
-    {
-        None = 1, Front = 2, Back = 3
-    };
-
-    enum class CONSERVATIVE_RASTERIZATION_MODE
-    {
-        CONSERVATIVE_RASTERIZATION_MODE_OFF = 1,
-        CONSERVATIVE_RASTERIZATION_MODE_ON = 2
-    };
-
-    enum class BlendMode
-    {
-        BLEND_ZERO = 1,
-        BLEND_ONE = 2,
-        BLEND_SRC_COLOR = 3,
-        BLEND_INV_SRC_COLOR = 4,
-        BLEND_SRC_ALPHA = 5,
-        BLEND_INV_SRC_ALPHA = 6,
-        BLEND_DEST_ALPHA = 7,
-        BLEND_INV_DEST_ALPHA = 8,
-        BLEND_DEST_COLOR = 9,
-        BLEND_INV_DEST_COLOR = 10,
-        BLEND_SRC_ALPHA_SAT = 11,
-        BLEND_BLEND_FACTOR = 14,
-        BLEND_INV_BLEND_FACTOR = 15,
-        BLEND_SRC1_COLOR = 16,
-        BLEND_INV_SRC1_COLOR = 17,
-        BLEND_SRC1_ALPHA = 18,
-        BLEND_INV_SRC1_ALPHA = 19
-    };
-
-    enum class BLEND_OP
-    {
-        BLEND_OP_ADD = 1,
-        BLEND_OP_SUBTRACT = 2,
-        BLEND_OP_REV_SUBTRACT = 3,
-        BLEND_OP_MIN = 4,
-        BLEND_OP_MAX = 5
-    };
-    enum class LOGIC_OP
-    {
-        LOGIC_OP_CLEAR = 0,
-        LOGIC_OP_SET = 1,
-        LOGIC_OP_COPY = 2,
-        LOGIC_OP_COPY_INVERTED = 3,
-        LOGIC_OP_NOOP = 4,
-        LOGIC_OP_INVERT = 5,
-        LOGIC_OP_AND = 6,
-        LOGIC_OP_NAND = 7,
-        LOGIC_OP_OR = 8,
-        LOGIC_OP_NOR = 9,
-        LOGIC_OP_XOR = 10,
-        LOGIC_OP_EQUIV = 11,
-        LOGIC_OP_AND_REVERSE = 12,
-        LOGIC_OP_AND_INVERTED = 13,
-        LOGIC_OP_OR_REVERSE = 14,
-        LOGIC_OP_OR_INVERTED = 15
-    };
-
-    enum class COLOR_WRITE_ENABLE
-    {
-       COLOR_WRITE_ENABLE_RED = 1,
-       COLOR_WRITE_ENABLE_GREEN = 2,
-       COLOR_WRITE_ENABLE_BLUE = 4,
-       COLOR_WRITE_ENABLE_ALPHA = 8,
-       COLOR_WRITE_ENABLE_ALL = (((COLOR_WRITE_ENABLE_RED | COLOR_WRITE_ENABLE_GREEN) | COLOR_WRITE_ENABLE_BLUE) |COLOR_WRITE_ENABLE_ALPHA)
-    };
-
-    enum class DEPTH_WRITE_MASK
-    {
-        DEPTH_WRITE_MASK_ZERO = 0,
-        DEPTH_WRITE_MASK_ALL = 1
-    };
-
-    enum class COMPARISON_FUNC
-    {
-        COMPARISON_FUNC_NEVER = 1,
-        COMPARISON_FUNC_LESS = 2,
-        COMPARISON_FUNC_EQUAL = 3,
-        COMPARISON_FUNC_LESS_EQUAL = 4,
-        COMPARISON_FUNC_GREATER = 5,
-        COMPARISON_FUNC_NOT_EQUAL = 6,
-        COMPARISON_FUNC_GREATER_EQUAL = 7,
-        COMPARISON_FUNC_ALWAYS = 8
-    };
-
-    enum class STENCIL_OP
-    {
-        STENCIL_OP_KEEP = 1,
-        STENCIL_OP_ZERO = 2,
-        STENCIL_OP_REPLACE = 3,
-        STENCIL_OP_INCR_SAT = 4,
-        STENCIL_OP_DECR_SAT = 5,
-        STENCIL_OP_INVERT = 6,
-        STENCIL_OP_INCR = 7,
-        STENCIL_OP_DECR = 8
-    };
-
-    enum PRIMITIVE_TOPOLOGY_TYPE
-    {
-        PRIMITIVE_TOPOLOGY_TYPE_UNDEFINED = 0,
-        PRIMITIVE_TOPOLOGY_TYPE_POINT = 1,
-        PRIMITIVE_TOPOLOGY_TYPE_LINE = 2,
-        PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE = 3,
-        PRIMITIVE_TOPOLOGY_TYPE_PATCH = 4
-    };
-
-    enum class PIPELINE_STATE_FLAGS
-    {
-        PIPELINE_STATE_FLAG_NONE = 0,
-        PIPELINE_STATE_FLAG_TOOL_DEBUG = 0x1
-    };
-    /////////////////////////////////////////DESC///////////////////////////////////////
-
     struct RasterState
     {
         RasterState() = default;
+        D3D12_RASTERIZER_DESC GetDX12RasterDesc() const
+        {
+            D3D12_RASTERIZER_DESC rasterDesc{};
+            rasterDesc.FillMode = GetDX12FillMode(fillMode);
+            rasterDesc.DepthBias = depthBias;
+            rasterDesc.DepthBiasClamp = depthBiasClamp;
+            rasterDesc.AntialiasedLineEnable = antialiasedLineEnable;
+            rasterDesc.ConservativeRaster = GetDX12ConservativeRasterizationMode(ConservativeRaster);
+            rasterDesc.CullMode = GetDX12CullMode(cullMode);
+            rasterDesc.ForcedSampleCount = forcedSampleCount;
+            rasterDesc.FrontCounterClockwise = frontCounterClockwise;
+            rasterDesc.MultisampleEnable = multisampleEnable;
+            rasterDesc.SlopeScaledDepthBias = slopeScaledDepthBias;
+            return rasterDesc;
+        }
         FillMode fillMode = FillMode::SOLID;
         CullMode cullMode = CullMode::Back;
         bool frontCounterClockwise = false;
@@ -145,6 +40,21 @@ namespace ColaMan
     struct RenderTargetBlendState
     {
         RenderTargetBlendState() = default;
+        D3D12_RENDER_TARGET_BLEND_DESC GetDX12RenderTargetBlendDesc() const
+        {
+            D3D12_RENDER_TARGET_BLEND_DESC dx12BlendDesc{};
+            dx12BlendDesc.BlendEnable = BlendEnable;
+            dx12BlendDesc.LogicOpEnable = LogicOpEnable;
+            dx12BlendDesc.SrcBlend = GetDX12BlendMode(SrcBlend);
+            dx12BlendDesc.DestBlend = GetDX12BlendMode(DestBlend);
+            dx12BlendDesc.BlendOp = GetDX12BlendOp(BlendOp);
+            dx12BlendDesc.SrcBlendAlpha = GetDX12BlendMode(SrcBlendAlpha);
+            dx12BlendDesc.DestBlendAlpha = GetDX12BlendMode(DestBlendAlpha);
+            dx12BlendDesc.BlendOpAlpha = GetDX12BlendOp(BlendOpAlpha);
+            dx12BlendDesc.LogicOp = GetDX12LogicOp(LogicOp);
+            dx12BlendDesc.RenderTargetWriteMask = RenderTargetWriteMask;
+            return dx12BlendDesc;
+        }
         bool BlendEnable = false;
         bool LogicOpEnable = false;
         BlendMode SrcBlend = BlendMode::BLEND_ONE;
@@ -159,6 +69,20 @@ namespace ColaMan
 
     struct BlendState
     {
+        D3D12_BLEND_DESC GetD3D12BlendDesc() const
+        {
+            D3D12_BLEND_DESC desc{};
+            desc.AlphaToCoverageEnable = AlphaToCoverageEnable;
+            desc.IndependentBlendEnable = IndependentBlendEnable;
+
+            for (UINT i = 0; i < 8; ++i)
+            {
+                desc.RenderTarget[i] = RenderTarget[i].GetDX12RenderTargetBlendDesc();
+            }
+
+            return desc;
+        }
+
         BlendState() = default;
         bool AlphaToCoverageEnable = false;
         bool IndependentBlendEnable = false;
@@ -225,6 +149,16 @@ namespace ColaMan
         std::vector<InputElement>::iterator end() { return m_Elements.end(); }
         std::vector<InputElement>::const_iterator begin() const { return m_Elements.begin(); }
         std::vector<InputElement>::const_iterator end() const { return m_Elements.end(); }
+
+        D3D12_INPUT_LAYOUT_DESC GetDX12InputLayoutDesc()const
+        {
+            std::vector<D3D12_INPUT_ELEMENT_DESC> mInputLayout;
+            for (auto iter = begin(); iter != end(); iter++)
+            {
+                mInputLayout.push_back({ iter->Name.c_str(), iter->Index, format2DXFormat(iter->Type), iter->Slot, iter->Offset, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 });
+            }
+            return { mInputLayout.data(), (UINT)mInputLayout.size() };
+        }
     private:
         void CalculateOffsetsAndStride()
         {
@@ -243,6 +177,15 @@ namespace ColaMan
 
     struct DEPTH_STENCILOP
     {
+        D3D12_DEPTH_STENCILOP_DESC DEPTH_STENCILOP::GetDX12DepthStencilOpDesc() const
+        {
+            D3D12_DEPTH_STENCILOP_DESC desc{};
+            desc.StencilFailOp = GetDX12StencilOp(StencilFailOp);
+            desc.StencilDepthFailOp = GetDX12StencilOp(StencilDepthFailOp);
+            desc.StencilPassOp = GetDX12StencilOp(StencilPassOp);
+            desc.StencilFunc = GetDX12ComparisonFunc(StencilFunc);
+            return desc;
+        }
        STENCIL_OP StencilFailOp;
        STENCIL_OP StencilDepthFailOp;
        STENCIL_OP StencilPassOp;
@@ -251,6 +194,19 @@ namespace ColaMan
 
     struct DepthStencilState
     {
+        D3D12_DEPTH_STENCIL_DESC DepthStencilState::GetDX12DepthStencilDesc() const
+        {
+            D3D12_DEPTH_STENCIL_DESC desc{};
+            desc.DepthEnable = DepthEnable;
+            desc.DepthWriteMask = GetDX12DepthWriteMask(DepthWriteMask);
+            desc.DepthFunc = GetDX12ComparisonFunc(DepthFunc);
+            desc.StencilEnable = StencilEnable;
+            desc.StencilReadMask = StencilReadMask;
+            desc.StencilWriteMask = StencilWriteMask;
+            desc.FrontFace = FrontFace.GetDX12DepthStencilOpDesc();
+            desc.BackFace = BackFace.GetDX12DepthStencilOpDesc();
+            return desc;
+        }
         bool DepthEnable;
         DEPTH_WRITE_MASK DepthWriteMask;
         COMPARISON_FUNC DepthFunc;
@@ -263,6 +219,13 @@ namespace ColaMan
 
     struct SampleState
     {
+        DXGI_SAMPLE_DESC GetDXGISampleDesc() const
+        {
+            DXGI_SAMPLE_DESC desc{};
+            desc.Count = Count;
+            desc.Quality = Quality;
+            return desc;
+        }
         UINT Count;
         UINT Quality;
     };
@@ -270,6 +233,37 @@ namespace ColaMan
     class PipelineState
     {
     public:
+        D3D12_GRAPHICS_PIPELINE_STATE_DESC PipelineState::GetD3D12GraphicsPipelineStateDesc() const
+        {
+            D3D12_GRAPHICS_PIPELINE_STATE_DESC desc{};
+            desc.pRootSignature = DirectX12Map::GetRootSignature(rootSignatureIndex);
+            desc.VS = vertexShader.Bound();
+            desc.PS = pixelShader.Bound();
+            desc.DS = domainShader.Bound();
+            desc.HS = hullShader.Bound();
+            desc.GS = geometryShader.Bound();
+            desc.BlendState = blendState.GetD3D12BlendDesc();
+            desc.SampleMask = sampleMask;
+            desc.RasterizerState = rasterState.GetDX12RasterDesc();
+            desc.DepthStencilState = depthStencilState.GetDX12DepthStencilDesc();
+            desc.InputLayout = inputLayout.GetDX12InputLayoutDesc();
+            desc.PrimitiveTopologyType = GetDX12PrimitiveTopologyType(primitiveTopologyType);
+            desc.NumRenderTargets = numRenderTargets;
+            for (UINT i = 0; i < numRenderTargets; ++i)
+            {
+                desc.RTVFormats[i] = rtvFormats[i];
+            }
+            desc.DSVFormat = dsvFormat;
+            desc.SampleDesc.Count = sampleState.Count;
+            desc.SampleDesc.Quality = sampleState.Quality;
+            desc.NodeMask = nodeMask;
+            desc.Flags = GetDX12PipelineStateFlags(flags);
+
+            // Set other members as needed.
+
+            return desc;
+        }
+
         PipelineState()
         {
             pipelineIndex = index;
@@ -280,11 +274,11 @@ namespace ColaMan
 
         //property
         uint16_t rootSignatureIndex;
-        Shader vertexShader;
-        Shader pixelShader;
-        Shader domainShader;
-        Shader hullShader;
-        Shader geometryShader;
+        mutable Shader vertexShader;
+        mutable Shader pixelShader;
+        mutable Shader domainShader;
+        mutable Shader hullShader;
+        mutable Shader geometryShader;
         BlendState blendState;
         UINT sampleMask;
         RasterState rasterState;

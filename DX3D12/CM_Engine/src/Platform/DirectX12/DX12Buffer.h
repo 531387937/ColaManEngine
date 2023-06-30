@@ -1,25 +1,9 @@
 #pragma once
 #include "ColaMan/Renderer/Buffer.h"
 #include <d3d12.h>
+#include "Platform/DirectX12/CM2DX12.h"
 
 namespace ColaMan {
-
-	static DXGI_FORMAT ShaderDataTypeToDX12Type(ShaderDataType shaderType)
-	{
-		switch (shaderType)
-		{
-		case ColaMan::ShaderDataType::None:			return DXGI_FORMAT::DXGI_FORMAT_UNKNOWN;
-		case ColaMan::ShaderDataType::Float:		return DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT;
-		case ColaMan::ShaderDataType::Float2:		return DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT;
-		case ColaMan::ShaderDataType::Float3:		return DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT;
-		case ColaMan::ShaderDataType::Float4:		return DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT;
-		case ColaMan::ShaderDataType::Int:			return DXGI_FORMAT::DXGI_FORMAT_R32_SINT;
-		case ColaMan::ShaderDataType::Int2:			return DXGI_FORMAT::DXGI_FORMAT_R32G32_SINT;
-		case ColaMan::ShaderDataType::Int3:			return DXGI_FORMAT::DXGI_FORMAT_R32G32B32_SINT;
-		case ColaMan::ShaderDataType::Int4:			return DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_SINT;
-		case ColaMan::ShaderDataType::Bool:			return DXGI_FORMAT::DXGI_FORMAT_R8_UINT;
-		}
-	}
 
 	class DX12VertexBuffer :public VertexBuffer
 	{

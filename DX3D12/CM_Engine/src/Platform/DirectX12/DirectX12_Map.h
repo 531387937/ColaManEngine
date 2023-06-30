@@ -11,11 +11,11 @@ namespace ColaMan
 	public:
 		inline static void AddPipelineState(uint16_t index, ComPtr<ID3D12PipelineState> pipeline)
 		{
-			mPipelines[index] = pipeline;
+			mPipelines[index] = std::move(pipeline);
 		}
-		inline static void AddRootSignature(uint16_t index, ComPtr<ID3D12RootSignature> rootSignature)
+		inline static void AddRootSignature(uint16_t index, ComPtr<ID3D12RootSignature>& rootSignature)
 		{
-			mRootSignatures[index] = rootSignature;
+			mRootSignatures[index] = std::move(rootSignature);
 		}
 		inline static ID3D12PipelineState* GetPipeline(uint16_t index)
 		{

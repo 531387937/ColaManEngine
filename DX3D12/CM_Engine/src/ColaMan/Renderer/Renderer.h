@@ -1,6 +1,6 @@
 #pragma once
 #include "RenderCommand.h"
-
+#include "RenderDevice.h"
 namespace ColaMan {
 	
 	class Renderer {
