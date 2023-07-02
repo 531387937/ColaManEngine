@@ -37,19 +37,25 @@ namespace ColaMan
 		ib.reset(IndexBuffer::Create(indices.data(), indices.size()));
 
 
-		VsShader = new Shader(L"Shaders\\color.hlsl", nullptr, "VS", "vs_5_0");
-		PsShader = new Shader(L"Shaders\\color.hlsl", nullptr, "PS", "ps_5_0");
+		VsShader.reset(new Shader(L"Shaders\\color.hlsl", nullptr, "VS", "vs_5_0"));
+		PsShader.reset(new Shader(L"Shaders\\color.hlsl", nullptr, "PS", "ps_5_0"));
 
 		InputLayout layout = {
 			{"POSITION",ShaderDataType::Float3},
 			{"COLOR",ShaderDataType::Float4},
 		};
 		vb->SetLayout(layout);
-		for (auto iter = vb->GetLayout().begin(); iter != vb->GetLayout().end(); iter++)
-		{
-			mInputLayout.push_back( { iter->Name.c_str(), iter->Index, format2DXFormat(iter->Type), iter->Slot, iter->Offset, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0});
-			
-		}
+		//for (auto iter = vb->GetLayout().begin(); iter != vb->GetLayout().end(); iter++)
+		//{
+		//	mInputLayout.push_back( { iter->Name.c_str(), iter->Index, format2DXFormat(iter->Type), iter->Slot, iter->Offset, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0});
+		//	
+		//}
+		DescriptorHeap mHeap;
+		mHeap.descriptorNum = 1;
+		mHeap.type = DESCRIPTOR_HEAP_TYPE::DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+		mHeap.flags = DESCRIPTOR_HEAP_FLAGS::DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+		RenderDevice::CMCreateDescriptorHeap(&mHeap);
+		descriptorIndex = mHeap.descriptorIndex;
 
 		D3D12_DESCRIPTOR_HEAP_DESC descriptorHeapDesc = {};
 		descriptorHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;  // 描述符堆类型为常量缓冲区/着色器资源视图/非结构化资源视图
@@ -58,42 +64,67 @@ namespace ColaMan
 
 		DirectX12Context::GetInstance()->GetDevice()->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptorHeap));
 
+		RootSignature rootSig;
+		rootSig.numParameters = 0;
+		rootSig.numSamplers = 0;
+		rootSig.staticSamplers = nullptr;
+		rootSig.rootFlags = ROOT_SIGNATURE_FLAGS::ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
+		rootSig.parameters = nullptr;
+		rootSigIndex = rootSig.rootSignatureIndex;
+		RenderDevice::CMCreateRootSignature(&rootSig);
+		rootSigIndex = rootSig.rootSignatureIndex;
 
-		CD3DX12_ROOT_SIGNATURE_DESC sigDesc(0, nullptr, 0, nullptr, D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
-		ComPtr<ID3DBlob> serializedSig = nullptr;
-		ComPtr<ID3DBlob> errorBlob = nullptr;
 
-		HRESULT hr = D3D12SerializeRootSignature(&sigDesc, D3D_ROOT_SIGNATURE_VERSION_1, serializedSig.GetAddressOf(), errorBlob.GetAddressOf());
-		if (errorBlob != nullptr)
-		{
-			OutputDebugStringA((char*)errorBlob->GetBufferPointer());
-		}
-		ThrowIfFailed(hr);
+		//CD3DX12_ROOT_SIGNATURE_DESC sigDesc(0, nullptr, 0, nullptr, D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+		//ComPtr<ID3DBlob> serializedSig = nullptr;
+		//ComPtr<ID3DBlob> errorBlob = nullptr;
 
-		ThrowIfFailed(DirectX12Context::GetInstance()->GetDevice()->CreateRootSignature(0, serializedSig->GetBufferPointer(), serializedSig->GetBufferSize(), IID_PPV_ARGS(mRootSignature.GetAddressOf())));
+		//HRESULT hr = D3D12SerializeRootSignature(&sigDesc, D3D_ROOT_SIGNATURE_VERSION_1, serializedSig.GetAddressOf(), errorBlob.GetAddressOf());
+		//if (errorBlob != nullptr)
+		//{
+		//	OutputDebugStringA((char*)errorBlob->GetBufferPointer());
+		//}
+		//ThrowIfFailed(hr);
 
-		D3D12_GRAPHICS_PIPELINE_STATE_DESC opaquePsoDesc;
+		//ThrowIfFailed(DirectX12Context::GetInstance()->GetDevice()->CreateRootSignature(0, serializedSig->GetBufferPointer(), serializedSig->GetBufferSize(), IID_PPV_ARGS(mRootSignature.GetAddressOf())));
 
-		ZeroMemory(&opaquePsoDesc, sizeof(D3D12_GRAPHICS_PIPELINE_STATE_DESC));
+		PipelineState pso;
+		pso.inputLayout = layout;
+		pso.rootSignatureIndex = rootSigIndex;
+		pso.vertexShader = VsShader;
+		pso.pixelShader = PsShader;
+		pso.numRenderTargets = 1;
+		pso.primitiveTopologyType = PRIMITIVE_TOPOLOGY_TYPE::PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+		pso.rtvFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
+		pso.dsvFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
+		pso.sampleMask = UINT_MAX;
+		pso.sampleState.Count = 1;
+		pso.sampleState.Quality = 0;
+		psoIndex = pso.pipelineIndex;
+		RenderDevice::CMCreatePipeline(&pso);
 
-		opaquePsoDesc.InputLayout = { mInputLayout.data(), (UINT)mInputLayout.size() };
-		opaquePsoDesc.pRootSignature = mRootSignature.Get();
-		opaquePsoDesc.VS = VsShader->Bound();
-		opaquePsoDesc.PS = PsShader->Bound();
-		opaquePsoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+		//D3D12_GRAPHICS_PIPELINE_STATE_DESC opaquePsoDesc;
 
-		opaquePsoDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
-		opaquePsoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
-		opaquePsoDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
-		opaquePsoDesc.SampleMask = UINT_MAX;
-		opaquePsoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
-		opaquePsoDesc.NumRenderTargets = 1;
-		opaquePsoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
-		opaquePsoDesc.SampleDesc.Count = 1;
-		opaquePsoDesc.SampleDesc.Quality = 0;
-		opaquePsoDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
+		//ZeroMemory(&opaquePsoDesc, sizeof(D3D12_GRAPHICS_PIPELINE_STATE_DESC));
 
-		ThrowIfFailed(DirectX12Context::GetInstance()->GetDevice()->CreateGraphicsPipelineState(&opaquePsoDesc, IID_PPV_ARGS(&mPSO)));
+		//opaquePsoDesc.InputLayout = { mInputLayout.data(), (UINT)mInputLayout.size() };
+		//opaquePsoDesc.pRootSignature = mRootSignature.Get();
+		//opaquePsoDesc.VS = VsShader->Bound();
+		//opaquePsoDesc.PS = PsShader->Bound();
+		//opaquePsoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+
+		//opaquePsoDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
+		//opaquePsoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
+		//opaquePsoDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
+		//opaquePsoDesc.SampleMask = UINT_MAX;
+		//opaquePsoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+		//opaquePsoDesc.NumRenderTargets = 1;
+		//opaquePsoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
+		//opaquePsoDesc.SampleDesc.Count = 1;
+		//opaquePsoDesc.SampleDesc.Quality = 0;
+		//opaquePsoDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
+
+		//ThrowIfFailed(DirectX12Context::GetInstance()->GetDevice()->CreateGraphicsPipelineState(&opaquePsoDesc, IID_PPV_ARGS(&mPSO)));
 
 		Dx12Core::EndCreateResource();
 	}
@@ -128,8 +159,11 @@ namespace ColaMan
 				//Renderer::Flush();
 				ID3D12DescriptorHeap* descriptorHeaps[] = { descriptorHeap.Get() };
 				DirectX12Context::GetInstance()->GetCmdList()->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
-				DirectX12Context::GetInstance()->GetCmdList()->SetGraphicsRootSignature(mRootSignature.Get());
-				DirectX12Context::GetInstance()->GetCmdList()->SetPipelineState(mPSO.Get());
+				RenderCommand::SetRootSignature(rootSigIndex);
+				RenderCommand::SetPipelineState(psoIndex);
+				
+				//DirectX12Context::GetInstance()->GetCmdList()->SetGraphicsRootSignature(mRootSignature.Get());
+				//DirectX12Context::GetInstance()->GetCmdList()->SetPipelineState(mPSO.Get());
 
 				//ib->Bind();
 				//DirectX12Context::GetInstance()->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

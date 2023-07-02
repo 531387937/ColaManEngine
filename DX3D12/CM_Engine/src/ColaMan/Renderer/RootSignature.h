@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ColaMan/Core/RenderCode.h"
+#include "Platform/DirectX12/CM2DX12.h"
+#include "ColaMan/DirectX12/d3dx12.h"
 namespace ColaMan
 {
 
@@ -111,14 +113,14 @@ namespace ColaMan
 			return rootParameter;
 		}
 
-		ROOT_PARAMETER_TYPE parameterType;
+		ROOT_PARAMETER_TYPE parameterType = ROOT_PARAMETER_TYPE::ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 		union
 		{
 			RootDescriptorTable DescriptorTable;
 			RootConstants Constants;
 			RootDescriptor Descriptor;
 		};
-		SHADER_VISIBILITY ShaderVisibility;
+		SHADER_VISIBILITY ShaderVisibility = SHADER_VISIBILITY::SHADER_VISIBILITY_ALL;
 	};
 
 	struct StaticSamplerDesc
@@ -215,13 +217,6 @@ namespace ColaMan
 			ID3D12RootSignature* rootSignature = nullptr;
 			hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(), signatureBlob->GetBufferSize(), IID_PPV_ARGS(&rootSignature));
 
-			// 释放资源
-			signatureBlob->Release();
-			if (errorBlob)
-			{
-				errorBlob->Release();
-			}
-
 			if (FAILED(hr))
 			{
 				// 创建失败，处理错误
@@ -236,8 +231,8 @@ namespace ColaMan
 
 		UINT numParameters;
 		UINT numSamplers;
-		std::unique_ptr<RootParameter> parameters;
-		std::unique_ptr<StaticSamplerDesc> staticSamplers;
+		std::unique_ptr<RootParameter> parameters = nullptr;
+		std::unique_ptr<StaticSamplerDesc> staticSamplers = nullptr;
 		ROOT_SIGNATURE_FLAGS rootFlags;
 	private:
 		static uint16_t index;

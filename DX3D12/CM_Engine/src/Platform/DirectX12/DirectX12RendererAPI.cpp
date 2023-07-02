@@ -19,3 +19,13 @@ void ColaMan::DirectX12RendererAPI::DrawIndexed(const std::shared_ptr<VertexBuff
 	vertexBuffer->Bind();
 	Dx12Core::GetCommandList()->DrawIndexedInstanced(IndexBuffer->GetCount(), 1, 0, 0, 0);
 }
+
+void ColaMan::DirectX12RendererAPI::SetPipeline(const uint16_t psoIndex)
+{
+	Dx12Core::GetCommandList()->SetPipelineState(DirectX12Map::GetPipeline(psoIndex));
+}
+
+void ColaMan::DirectX12RendererAPI::SetRootSignature(const uint16_t rootSigIndex)
+{
+	Dx12Core::GetCommandList()->SetGraphicsRootSignature(DirectX12Map::GetRootSignature(rootSigIndex));
+}

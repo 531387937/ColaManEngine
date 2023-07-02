@@ -5,17 +5,21 @@
 namespace ColaMan
 {
 
-	void DirectX12RenderDevice::CreatePipeline(const std::shared_ptr<PipelineState>& pipelineState)
+	void DirectX12RenderDevice::CreatePipeline(PipelineState* pipelineState)
 	{
-		ComPtr<ID3D12PipelineState> pso;
-		D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = pipelineState->GetD3D12GraphicsPipelineStateDesc();
+		ComPtr<ID3D12PipelineState> pso = pipelineState->GetD3D12GraphicsPipelineStateDesc(Dx12Core::GetDevice());
 		
-		Dx12Core::GetDevice()->CreateGraphicsPipelineState(&psoDesc, IID_PPV_ARGS(pso.GetAddressOf()));
+		//ThrowIfFailed(Dx12Core::GetDevice()->CreateGraphicsPipelineState(&psoDesc, IID_PPV_ARGS(pso.GetAddressOf())));
 		DirectX12Map::AddPipelineState(pipelineState->pipelineIndex, pso);
 	}
-	void DirectX12RenderDevice::CreateRootSignature(const std::shared_ptr<RootSignature>& rootSig)
+	void DirectX12RenderDevice::CreateRootSignature(RootSignature* rootSig)
 	{
 		ComPtr<ID3D12RootSignature> rootSignature = rootSig->GetD3D12RootSignature(Dx12Core::GetDevice());
 		DirectX12Map::AddRootSignature(rootSig->rootSignatureIndex, rootSignature);
+	}
+	void DirectX12RenderDevice::CreateDescriptorHeap(DescriptorHeap* descriptor)
+	{
+		ComPtr<ID3D12DescriptorHeap> descriptorHeap = descriptor->GetDX12DescriptorHeapDesc(Dx12Core::GetDevice());
+		DirectX12Map::AddDescriptorHeap( descriptor->descriptorIndex, descriptorHeap);
 	}
 }

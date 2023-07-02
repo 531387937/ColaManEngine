@@ -38,13 +38,16 @@ namespace ColaMan {
 		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
 
-		Shader* VsShader;
-		Shader* PsShader;
+		std::shared_ptr<Shader> VsShader;
+		std::shared_ptr<Shader> PsShader;
 		std::vector<D3D12_INPUT_ELEMENT_DESC> mInputLayout;
 		ComPtr<ID3D12PipelineState> mPSO = nullptr;
 		ComPtr<ID3D12RootSignature> mRootSignature = nullptr;
 		ComPtr<ID3D12DescriptorHeap> descriptorHeap = nullptr;
 
+		uint16_t descriptorIndex;
+		uint16_t psoIndex;
+		uint16_t rootSigIndex;
 		std::shared_ptr<VertexBuffer> vb;
 		std::shared_ptr<IndexBuffer> ib;
 		std::vector<float> vertices;

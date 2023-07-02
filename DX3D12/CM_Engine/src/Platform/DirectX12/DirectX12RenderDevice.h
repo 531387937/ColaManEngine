@@ -6,9 +6,9 @@ namespace ColaMan
 	{
 	public:
 		DirectX12RenderDevice() = default;
-		virtual void CreatePipeline(const std::shared_ptr<PipelineState>& pipelineState) override;
-		virtual void CreateRootSignature(const std::shared_ptr<RootSignature>& rootSig) override;
-
+		void CreatePipeline( PipelineState* pipelineState);
+		void CreateRootSignature( RootSignature* rootSig);
+		void CreateDescriptorHeap( DescriptorHeap* descriptor);
 
 	};
 }

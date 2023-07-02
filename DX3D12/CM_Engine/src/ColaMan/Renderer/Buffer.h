@@ -1,10 +1,9 @@
 #pragma once
-#include "PipelineState.h"
-#include "ColaMan/Core/RenderCode.h"
-#include "Platform/DirectX12/CM2DX12.h"
+//#include <ColaMan/Renderer/PipelineState.h>
+
 namespace ColaMan {
 
-
+	extern struct InputLayout;
 	class VertexBuffer
 	{
 	public:

@@ -13,4 +13,12 @@ namespace ColaMan
 	{
 		s_RendererAPI->Clear();
 	}
+	void RenderCommand::SetPipelineState(const uint16_t psoIndex)
+	{
+		s_RendererAPI->SetPipeline(psoIndex);
+	}
+	void RenderCommand::SetRootSignature(const uint16_t rootIndex)
+	{
+		s_RendererAPI->SetRootSignature(rootIndex);
+	}
 }

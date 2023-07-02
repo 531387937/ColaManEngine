@@ -2,9 +2,8 @@
 #include "ColaMan/Renderer/Buffer.h"
 #include <d3d12.h>
 #include "Platform/DirectX12/CM2DX12.h"
-
+#include "ColaMan/Renderer/PipelineState.h"
 namespace ColaMan {
-
 	class DX12VertexBuffer :public VertexBuffer
 	{
 	public:
@@ -13,7 +12,7 @@ namespace ColaMan {
 
 		virtual void Bind()const override;
 		virtual void Unbind()const override;
-		virtual void SetLayout(const InputLayout& layout)override;
+		virtual void SetLayout(const InputLayout& layout) override;
 		virtual const InputLayout& GetLayout() const override;
 	private:
 		Microsoft::WRL::ComPtr<ID3D12Resource> buffer;

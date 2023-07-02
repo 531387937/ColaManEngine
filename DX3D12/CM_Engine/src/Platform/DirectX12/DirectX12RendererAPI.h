@@ -8,6 +8,8 @@ namespace ColaMan
 		virtual void SetClearColor(const DirectX::XMFLOAT4& color) override;
 		virtual void Clear() override;
 		virtual void DrawIndexed(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& IndexBuffer) override;
+		virtual void SetPipeline(const uint16_t psoIndex) override;
+		virtual void SetRootSignature(const uint16_t rootSigIndex) override;
 	};
 }
 

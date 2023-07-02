@@ -9,34 +9,15 @@ namespace ColaMan
 	class DirectX12Map
 	{
 	public:
-		inline static void AddPipelineState(uint16_t index, ComPtr<ID3D12PipelineState> pipeline)
-		{
-			mPipelines[index] = std::move(pipeline);
-		}
-		inline static void AddRootSignature(uint16_t index, ComPtr<ID3D12RootSignature>& rootSignature)
-		{
-			mRootSignatures[index] = std::move(rootSignature);
-		}
-		inline static ID3D12PipelineState* GetPipeline(uint16_t index)
-		{
-			if (mPipelines[index])
-			{
-				return mPipelines[index].Get();
-			}
-			CM_CORE_ASSERT(false, "Can`t find the pipeline");
-			return nullptr;
-		}
-		inline static ID3D12RootSignature* GetRootSignature(uint16_t index)
-		{
-			if (mRootSignatures[index])
-			{
-				return mRootSignatures[index].Get();
-			}
-			CM_CORE_ASSERT(false, "Can`t find the rootSignature");
-			return nullptr;
-		}
+		static void AddPipelineState(uint16_t index, ComPtr<ID3D12PipelineState>& pipeline);
+		static void AddRootSignature(uint16_t index, ComPtr<ID3D12RootSignature>& rootSignature);
+		static void AddDescriptorHeap(uint16_t index, ComPtr<ID3D12DescriptorHeap>& descriptor);
+		static ID3D12PipelineState* GetPipeline(uint16_t index);
+		static ID3D12RootSignature* GetRootSignature(uint16_t index);
+		static ID3D12DescriptorHeap* GetDescriptorHeap(uint16_t index);
 	private:
 		static std::unordered_map<uint16_t, ComPtr<ID3D12PipelineState>> mPipelines;
 		static std::unordered_map<uint16_t, ComPtr<ID3D12RootSignature>> mRootSignatures;
+		static std::unordered_map<uint16_t, ComPtr<ID3D12DescriptorHeap>> mDescriptorHeaps;
 	};
 }

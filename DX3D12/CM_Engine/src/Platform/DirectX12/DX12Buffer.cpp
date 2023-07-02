@@ -3,6 +3,7 @@
 #include "ColaMan/DirectX12/d3dUtil.h" 
 #include "ColaMan/DirectX12/DX12Core.h"
 
+
 namespace ColaMan
 {
 	DX12VertexBuffer::DX12VertexBuffer(void* vertices, uint32_t size):count(size)
